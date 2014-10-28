@@ -181,6 +181,8 @@ Or with Bundler in your Gemfile.
 
 gem 'whenever', :require => false
 
+note: i did not include     :require => false    because I want to just include it everywhere
+
 
 
 In your "config/boot.rb" file:
@@ -190,3 +192,66 @@ require "whenever/capistrano"  NO triggers error
 
 
 maybe i need to write require 'whenever'  first?
+
+
+
+
+
+//////////////////////////////////////////////
+
+
+created:   Quote.update_quotes method
+
+
+
+class Quote < ActiveRecord::Base
+
+  def self.update_quotes
+    companies = Company.all;
+
+    companies.each do |company|
+      company_id = company.id
+      stock = StockQuote::Stock.quote(symbol)
+      price = stock.ask_realtime
+      Quote.create(company_id: company_id, price: price)
+    end
+  end
+
+end
+
+
+
+to copy the schedule file to crontab
+
+$ whenever --update-crontab
+
+
+want to run in development environment
+
+http://stackoverflow.com/questions/1070231/rails-cron-with-whenever-setting-the-environment
+
+my schedule.rb file:
+
+every 1.minute do
+  runner "Quote.update_quotes", :environment => 'development'
+end
+
+
+
+to remove task
+
+$ crontab -e
+
+opens in vim
+
+shift s to delete line
+
+esc to escape view
+
+shift ; w q   to save and exit
+
+
+
+
+
+git commit -m "update quotes and whenever gem working"

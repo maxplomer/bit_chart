@@ -20,14 +20,6 @@
 # Learn more: http://github.com/javan/whenever
 
 
-every 1.second do
-  symbol = "FSLR"
-
-  company = Company.find_by_symbol(symbol)
-  company_id = company.id
-
-  stock = StockQuote::Stock.quote("tsla")
-  price = stock.ask_realtime
-   
-  Quote.create(company_id: company_id, price: price)
+every 1.minute do
+  runner "Quote.update_quotes", :environment => 'development'
 end

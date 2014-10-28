@@ -55,4 +55,4 @@ end
 gem "stock_quote"
 
 # cron scheduler
-gem 'whenever', :require => false
+gem 'whenever'
