@@ -53,3 +53,6 @@ end
 
 # real-time stock quotes
 gem "stock_quote"
+
+# cron scheduler
+gem 'whenever', :require => false

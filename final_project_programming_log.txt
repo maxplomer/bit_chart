@@ -51,9 +51,7 @@ $ irb
 
 
 
-//// Topic: need to have a script that runs every minute in background ////
 
-store stock quote price monday-friday 9:30am to 4pm
 
 
 
@@ -122,3 +120,73 @@ go into console and make sure company and price is there
 $ commit -m "initial rails setup"
 
 
+
+//// Topic: need to have a script that runs every minute in background ////
+
+store stock quote price monday-friday 9:30am to 4pm
+
+i tried google search for: script that runs every minute rails
+
+intermediate step will be calling stock_quote in seeds.rb file to set price
+
+
+
+From:
+
+http://stackoverflow.com/questions/285717/a-cron-job-for-rails-best-practices
+
+I found:
+
+https://github.com/javan/whenever
+
+which is a ruby gem for writing and deploying cron jobs
+
+cron is a time-based job scheduler
+
+
+
+
+
+
+
+it seems like what i need to do is run this scheduler at system startup
+
+http://stackoverflow.com/questions/3790867/ruby-on-rails-run-a-method-on-server-start-2-3
+
+can put method call at bottom of boot.rb? NO
+
+
+
+$ cd /desktop/finance_clone
+$ wheneverize .
+
+
+add to config/schedule.rb
+
+every 1.second do
+  symbol = "FSLR"
+
+  company = Company.find_by_symbol(symbol)
+  company_id = company.id
+
+  stock = StockQuote::Stock.quote("tsla")
+  price = stock.ask_realtime
+   
+  Quote.create(company_id: company_id, price: price)
+end
+
+
+
+Or with Bundler in your Gemfile.
+
+gem 'whenever', :require => false
+
+
+
+In your "config/boot.rb" file:
+
+require "whenever/capistrano"  NO triggers error
+
+
+
+maybe i need to write require 'whenever'  first?
