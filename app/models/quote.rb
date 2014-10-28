@@ -23,7 +23,13 @@ class Quote < ActiveRecord::Base
   def percent_change
     price_now = self.price 
     price_prev = price_now - self.change 
-    return ((price_now / price_prev) - 1) * 100 
+    return truncate( ((price_now / price_prev) - 1) * 100 )
+  end
+
+  private
+
+  def truncate(x)
+    (x * 100).floor / 100.0
   end
   
 end
