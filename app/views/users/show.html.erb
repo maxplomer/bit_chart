@@ -3,3 +3,20 @@
 <h1><%= @user.email %></h1>
 
 <p>Hello, dear user!</p>
+
+
+<% if signed_in? && current_user.id == @user.id %>
+
+<h2>make a trade</h2>
+
+<form action="<%= user_trades_url(@user) %>" method="post">
+  <input
+     name="authenticity_token"
+     type="hidden"
+     value="<%= form_authenticity_token %>">
+
+</form>
+
+<% end %>
+
+
