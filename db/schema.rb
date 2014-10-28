@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20141028150447) do
   create_table "quotes", force: true do |t|
     t.integer  "company_id", null: false
     t.float    "price",      null: false
+    t.float    "change",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

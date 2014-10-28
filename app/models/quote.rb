@@ -6,17 +6,18 @@ class Quote < ActiveRecord::Base
     foreign_key: :company_id
   )
 
-
-
   def self.update_quotes
     companies = Company.all;
 
     companies.each do |company|
       company_id = company.id
+
       stock = StockQuote::Stock.quote(company.symbol)
       price = stock.ask_realtime
-      Quote.create(company_id: company_id, price: price)
+      change = stock.change_realtime
+
+      Quote.create(company_id: company_id, price: price, change: change)
     end
   end
-
+  
 end

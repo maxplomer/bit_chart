@@ -3,6 +3,7 @@ class CreateQuotes < ActiveRecord::Migration
     create_table :quotes do |t|
       t.integer :company_id, :null => false
       t.float :price, :null => false 
+      t.float :change, :null => false
 
       t.timestamps
     end

@@ -2,6 +2,19 @@
 
 <h1><%= @company.symbol %></h1>
 
-price = <%= @company.quotes.last.price %>
+<% quote = @company.quotes.last %>
+
+price = <%= quote.price %>
+
+<br>
+
+change = <%= quote.change %>
+
+<br>
+
+<% price_now = quote.price %>
+<% price_prev = price_now - quote.change %>
+
+percent change = <%= ((price_now / price_prev) - 1) * 100 %>
 
 <p>Hello, dear company!</p>

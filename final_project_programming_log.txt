@@ -331,3 +331,10 @@ how to have page auto refresh for quote? easy in backbone
 
 how to calculate the percent up? for alerts, and also company show
 
+
+
+
+could grab all quotes in an array!!!!
+stocks = StockQuote::Stock.quote(["aapl", "tsla"])
+much better, do this before portfolio page?
+
