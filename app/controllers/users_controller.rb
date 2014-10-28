@@ -27,8 +27,19 @@ class UsersController < ApplicationController
   end
 
   def edit
-    unless params.include?(:id) && current_user.id = params[:id]
+    @user = current_user
+    unless params.include?(:id) && current_user.id == params[:id].to_i     
       redirect_to user_url(current_user)
+    end
+  end
+  
+  def update
+    @user = current_user
+    if params.include?(:id) && current_user.id == params[:id].to_i && @user.update_attributes(user_update_params)
+      redirect_to user_url(@user)
+    else
+      flash.now[:errors] = @user.errors.full_messages
+      render :edit
     end
   end
 
@@ -36,5 +47,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password)
+  end
+  
+  def user_update_params
+      params.require(:user).permit(:name, :email)
   end
 end
