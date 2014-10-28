@@ -255,3 +255,14 @@ shift ; w q   to save and exit
 
 
 git commit -m "update quotes and whenever gem working"
+
+
+
+/////////////////////////////////////
+
+now need auth/ user model, routes and controllers to create portfolio page
+
+
+
+$ rails generate model User
+$ rails generate controller users

@@ -6,7 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
 Company.create(name: "Apple Inc.", symbol: "AAPL")
+Company.create(name: "Tesla Motors", symbol: "TSLA")
+Company.create(name: "Google", symbol: "GOOG")
 
-Quote.create(company_id: 1, price: 105.23)
+
+
+# restart db 
+# rake db:drop db:create:all db:migrate db:seed
+
