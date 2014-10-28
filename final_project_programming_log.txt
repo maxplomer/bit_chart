@@ -325,3 +325,9 @@ change root to new user
 
 $ rails generate controller companies
 
+
+how to have page auto refresh for quote? easy in backbone
+   -just have user press refresh for rails version or all versions
+
+how to calculate the percent up? for alerts, and also company show
+

@@ -1,8 +1,14 @@
 class Quote < ActiveRecord::Base
 
+  belongs_to(
+    :company,
+    class_name: "Company",
+    foreign_key: :company_id
+  )
+
+
+
   def self.update_quotes
-     
-  
     companies = Company.all;
 
     companies.each do |company|
