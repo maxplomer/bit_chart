@@ -1,0 +1,124 @@
+This is a guide and note for the creation of my final project with the working name "Finance Clone" and tag line "Facebook meets google finance".
+
+
+//// Topic: Initial Rails Installation ////
+
+$ rails _4.0.2_ new finance_clone --database postgresql
+
+
+config/database.yml by adding username: maxplomer and host: localhost
+
+When using postgresql, you should also run the command
+
+$ rake db:create:all
+
+add .DS_Store and .localized to .gitignore
+
+in the terminal before trying to run migrations
+
+# Add to Gemfile
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry-rails'
+  gem 'quiet_assets'
+end
+
+
+
+
+
+
+//// Topic: stock_quote ruby gem ////
+
+https://github.com/tyrauber/stock_quote
+
+
+Include the gem in your Gemfile:
+
+gem "stock_quote"
+
+
+sample usage:
+
+
+$ gem install stock_quote
+$ irb
+> require 'stock_quote'
+> stock = StockQuote::Stock.quote("tsla")
+> stock.ask_realtime
+ => 222.65 
+
+
+
+//// Topic: need to have a script that runs every minute in background ////
+
+store stock quote price monday-friday 9:30am to 4pm
+
+
+
+//// price model ////
+
+
+$ rails generate model Quote
+
+attributes: price and company_id
+
+migration file:
+
+class CreateQuotes < ActiveRecord::Migration
+  def change
+    create_table :quotes do |t|
+      t.integer :company_id, :null => false
+      t.float :price, :null => false 
+
+      t.timestamps
+    end
+  end
+end
+
+
+//// company model ////
+
+$ rails generate model Company
+
+attributes: name and symbol
+
+migration file:
+
+class CreateCompanies < ActiveRecord::Migration
+  def change
+    create_table :companies do |t|
+      t.string :name, :null => false
+      t.string :symbol, :null => false
+      t.timestamps
+    end
+  end
+end
+
+
+
+
+
+
+
+//// seeds.rb ////
+
+added
+
+Company.create(name: "Apple Inc.", symbol: "AAPL")
+Quote.create(company_id: 1, price: 105.23)
+
+
+
+
+//// run migrate and seed /////
+
+$ rake db:migrate db:seed
+
+go into console and make sure company and price is there
+
+
+$ commit -m "initial rails setup"
+
+
