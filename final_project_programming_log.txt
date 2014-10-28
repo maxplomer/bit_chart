@@ -315,3 +315,13 @@ add edit method in users controller
 
 and edit view erb file
 
+
+/////////////////////////////////
+
+remove require sign_in for users#show
+
+change root to new user
+
+
+$ rails generate controller companies
+
