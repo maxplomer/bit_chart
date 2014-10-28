@@ -19,5 +19,11 @@ class Quote < ActiveRecord::Base
       Quote.create(company_id: company_id, price: price, change: change)
     end
   end
+
+  def percent_change
+    price_now = self.price 
+    price_prev = price_now - self.change 
+    return ((price_now / price_prev) - 1) * 100 
+  end
   
 end
