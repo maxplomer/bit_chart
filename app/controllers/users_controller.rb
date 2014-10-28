@@ -26,6 +26,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    unless params.include?(:id) && current_user.id = params[:id]
+      redirect_to user_url(current_user)
+    end
+  end
+
   private
 
   def user_params

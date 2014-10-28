@@ -304,10 +304,14 @@ make sure to do bundle install and run db migrations
 git commit -m "add user authentication"
 
 
-
+//////////////////////////////////
 
 need edit user page, in value="" in my input elements?
 
+want to make sure you can see other user's show page
 
 
+add edit method in users controller
+
+and edit view erb file
 
