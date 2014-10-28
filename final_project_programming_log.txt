@@ -266,3 +266,48 @@ now need auth/ user model, routes and controllers to create portfolio page
 
 $ rails generate model User
 $ rails generate controller users
+$ rails generate controller sessions
+
+
+migration file for User model:
+
+class CreateUsers < ActiveRecord::Migration
+  def change
+    create_table :users do |t|
+      t.string :name, :null => false
+      t.string :email, :null => false
+      t.string :password_digest, :null => false
+      t.string :session_token, :null => false
+
+      t.timestamps
+    end
+    
+    add_index :users, :email, :unique => true
+    add_index :users, :session_token, :unique => true
+
+  end
+end
+
+
+
+
+
+filling out users_controller, sessions_controller, routes.rb, user.rb model file, application_controller, associated views
+
+add to gemfile 
+gem 'bcrypt', '~> 3.1.7'
+
+
+make sure to do bundle install and run db migrations
+
+
+git commit -m "add user authentication"
+
+
+
+
+need edit user page, in value="" in my input elements?
+
+
+
+

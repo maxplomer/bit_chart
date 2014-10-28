@@ -15,3 +15,6 @@ Company.create(name: "Google", symbol: "GOOG")
 # restart db 
 # rake db:drop db:create:all db:migrate db:seed
 
+# save schedule.rb to crontab
+# whenever --update-crontab
+
