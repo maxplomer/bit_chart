@@ -2,19 +2,34 @@ class TradesController < ApplicationController
   before_action :require_signed_in!, :only => [:create]
 
   def create
-  	@trade = Trade.new(trade_params)
-  	if current_user.id == params[:user_id].to_i && @trade.save
+ 
+    symbol = params["trade"]["symbol"].upcase
+    company = Company.find_by_symbol(symbol)
+    price = StockQuote::Stock.quote(symbol).ask
+    
+    if company.nil?
+      flash[:errors] = ["We don't trade that ticker"]
+      redirect_to user_url(current_user)
+    elsif price.nil?
+      flash[:errors] = ["We don't trade after hours"]
       redirect_to user_url(current_user)
     else
-      flash[:errors] = @trade.errors.full_messages
-      redirect_to new_session_url
-  	end
-  end
+      num_shares = params["trade"]["num_shares"]
 
-  private
+      @trade = Trade.new(
+        user_id: params["user_id"].to_i,
+        company_id: company.id,
+        num_shares: num_shares,
+        price: price
+      )
 
-  def trade_params
-    params.require(:trade).permit(:user_id, :company_id, :num_shares)
+      if current_user.id == params[:user_id].to_i && @trade.save
+        redirect_to user_url(current_user)
+      else
+        flash[:errors] = ["Trade error"]
+        redirect_to user_url(current_user)
+      end
+    end
   end
 
 end

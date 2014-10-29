@@ -356,3 +356,20 @@ need to run cron job thing
 upload to github
 $ git remote add origin https://github.com/maxplomer/finance-clone.git
 $ git push -u origin master
+
+
+
+
+
+/////////////////////////////////
+
+
+if place trade and ask if nil, want to put in errors that market is closed, and redirect back to user's page
+
+
+later might have scheduled trade feature
+
+
+user has many trades association, display trades on users show page
+
+wanna make sure if is our list of companies

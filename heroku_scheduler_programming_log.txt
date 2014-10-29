@@ -40,3 +40,9 @@ end
 manually run task
 
 $ heroku run rake update_quotes
+
+
+
+helpful link:
+
+http://stackoverflow.com/questions/24915904/whenever-scheduled-task-in-heroku-with-rails

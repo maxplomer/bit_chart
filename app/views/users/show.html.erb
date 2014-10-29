@@ -2,18 +2,32 @@
 
 <h1><%= @user.email %></h1>
 
-<p>Hello, dear user!</p>
-
 
 <% if signed_in? && current_user.id == @user.id %>
 
-<h2>make a trade</h2>
+<h2>Make a trade</h2>
 
 <form action="<%= user_trades_url(@user) %>" method="post">
   <input
      name="authenticity_token"
      type="hidden"
      value="<%= form_authenticity_token %>">
+
+  <label for="trade_symbol">Stock symbol</label>
+  <input
+     id="trade_symbol"
+     name="trade[symbol]"
+     type="text">
+  <br>
+
+  <label for="trade_num_shares">Number of Shares (negative to short)</label>
+  <input
+     id="trade_num_shares"
+     name="trade[num_shares]"
+     type="text">
+  <br>
+
+  <input type="submit" value="Place trade">
 
 </form>
 

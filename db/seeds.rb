@@ -27,3 +27,9 @@ User.create(name: "helloworld", email: "helloworld", password: "helloworld")
 Quote.create(company_id: 1, price: 106.74, change: 1.63)
 Quote.create(company_id: 2, price: 242.77, change: 21.10)
 Quote.create(company_id: 3, price: 548.90, change: 8.13)
+
+
+# want to create some sample trades because market is closed and can't trade after hours
+Trade.create(user_id: 1, company_id: 1, num_shares: 100, price: 95.42)
+Trade.create(user_id: 1, company_id: 2, num_shares: -100, price: 295.23)
+

@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20141028203221) do
     t.integer  "user_id",    null: false
     t.integer  "company_id", null: false
     t.integer  "num_shares", null: false
+    t.float    "price",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
