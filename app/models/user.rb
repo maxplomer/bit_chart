@@ -14,6 +14,35 @@ class User < ActiveRecord::Base
     dependent: :destroy
   )
 
+# want to create a table like so
+#company_id  share   
+#   1         10     
+
+# when calc profit/ percent
+# don't use portfolio table, use transaction history
+#do algorithm to temp add closing positions then use 
+#equations for profit/percent 
+
+  def portfolio
+    result = Hash.new(0)
+    self.trades.each do |trade|
+      result[trade.company_id] += trade.num_shares
+    end     
+
+    result.keys.each do |key|
+      if result[key] == 0
+        result.delete(key)
+      end
+    end
+
+    result
+  end
+
+
+
+
+  #auth
+
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)
     user.try(:is_password?, password) ? user : nil

@@ -32,4 +32,5 @@ Quote.create(company_id: 3, price: 548.90, change: 8.13)
 # want to create some sample trades because market is closed and can't trade after hours
 Trade.create(user_id: 1, company_id: 1, num_shares: 100, price: 95.42)
 Trade.create(user_id: 1, company_id: 2, num_shares: -100, price: 295.23)
-
+Trade.create(user_id: 1, company_id: 3, num_shares: 100, price: 25)
+Trade.create(user_id: 1, company_id: 3, num_shares: -100, price: 25)

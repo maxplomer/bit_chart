@@ -33,7 +33,7 @@
 
 <% end %>
 
-<h2> Transactions </h2>
+<h2> Trade history </h2>
 <table>
   <th>Company</th>
   <th>Number of Shares</th>
@@ -45,6 +45,23 @@
       <td><%= trade.price %></td>
     </tr>
   <% end %>
+</table>
+
+
+<h2> Portfolio </h2>
+<table>
+  <th>Company</th>
+  <th>Number of Shares</th>
+  <th>Current price</th>
+  <% @user.portfolio.keys.each do |company_id| %>
+    <tr>
+      <td><%= Company.find(company_id).symbol %></td>
+      <td><%= @user.portfolio[company_id] %></td>
+      <td><%= Company.find(company_id).quotes.last.price %></td>
+    </tr>
+  <% end %>
+
+
 </table>
 
 
