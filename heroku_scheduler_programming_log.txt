@@ -36,3 +36,7 @@ end
 
 
 
+
+manually run task
+
+$ heroku run rake update_quotes

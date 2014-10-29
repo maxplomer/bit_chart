@@ -19,3 +19,11 @@ User.create(name: "helloworld", email: "helloworld", password: "helloworld")
 # save schedule.rb to crontab
 # whenever --update-crontab
 
+
+
+
+# some end of the day stock quote because now using ask and change and ask is nil after hours
+#can't buy unless ask is not nil
+Quote.create(company_id: 1, price: 106.74, change: 1.63)
+Quote.create(company_id: 2, price: 242.77, change: 21.10)
+Quote.create(company_id: 3, price: 548.90, change: 8.13)
