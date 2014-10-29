@@ -34,7 +34,31 @@ class User < ActiveRecord::Base
     foreign_key: :user_id,
     dependent: :destroy
   )
+
+  has_many(
+    :follows,
+    class_name: "Follow",
+    foreign_key: :follower_id,
+    dependent: :destroy
+  )
+
+  has_many(
+    :users_they_follow,
+    through: :follows,
+    source: :leader
+  )
+
+  belongs_to(
+    :leaders,
+    class_name: "Follow",
+    foreign_key: :leader_id,
+  )
    
+  def follows?(user) 
+    self.users_they_follow.include?(user)
+  end
+
+
   def notification_value(company_id)
     notification = self.notifications.find_by_company_id(company_id)
     if notification.nil?

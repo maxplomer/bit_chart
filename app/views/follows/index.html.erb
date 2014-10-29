@@ -1,0 +1,15 @@
+<h1> Leaderboard </h1>
+
+
+<table>
+  <th>Name</th>
+  <th>Percent gain</th>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td>
+      	<%= "+" if user.percent_gain > 0 %><%= user.percent_gain %>&#37;
+      </td>
+    </tr>
+  <% end %>
+</table>
