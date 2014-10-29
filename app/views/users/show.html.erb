@@ -33,4 +33,32 @@
 
 <% end %>
 
+<h2> Transactions </h2>
+<table>
+  <th>Company</th>
+  <th>Number of Shares</th>
+  <th>Price</th>
+  <% @user.trades.each do |trade| %>
+    <tr>
+      <td><%= Company.find(trade.company_id).symbol %></td>
+      <td><%= trade.num_shares %></td>
+      <td><%= trade.price %></td>
+    </tr>
+  <% end %>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
