@@ -38,7 +38,31 @@ class User < ActiveRecord::Base
     result
   end
 
+  def profit
 
+    #copy trades 
+    temp_trades = []
+    self.trades.dup.each { |trade| temp_trades.push(trade) }
+
+    # temporarily close all positions
+    self.portfolio.keys.each do |company_id|
+      temp_trades.push(
+        Trade.new(
+          user_id: self.id,
+          company_id: company_id, 
+          num_shares: -self.portfolio[company_id], 
+          price: Company.find(company_id).quotes.last.price
+        )
+      )
+    end
+
+    result = 0
+    temp_trades.each do |trade|
+      result -= trade.num_shares * trade.price
+    end
+
+    result
+  end
 
 
   #auth
