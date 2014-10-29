@@ -61,6 +61,14 @@
     <br>
 
     <% if signed_in? %>
+      <%= link_to "Alerts", user_notification_messages_url(current_user) %>
+    <% else %>
+      <%= link_to "Alerts", new_session_url %>
+    <% end %>
+
+    <br>
+
+    <% if signed_in? %>
     <ul>
       <li>Signed in as: <%= current_user.email %></li>
       <li><%= link_to "Edit Account", edit_user_url(current_user) %></li>
