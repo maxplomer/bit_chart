@@ -399,3 +399,5 @@ will look for at any time for the absolute value of percent change to be greater
 
 
 want to make sure doesn't trigger an error when set 0 and no notification already set
+
+need to attach to update_quotes, that we also go through and check alerts to see if any triggered, might want to create an notification message model and then delete noticiation

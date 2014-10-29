@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   def notification_value(company_id)
     notification = self.notifications.find_by_company_id(company_id)
     if notification.nil?
-      0
+      0.0
     else
       notification.percent_swing
     end

@@ -65,12 +65,26 @@
       <td>
         <% if flag %> 
           <form action="<%= user_notifications_url(@user) %>" method="post">
+
+            <input
+              name="authenticity_token"
+              type="hidden"
+              value="<%= form_authenticity_token %>">
+
+            <input
+              id="notification-company_id"
+              name="notification[company_id]"
+              type="hidden"
+              value="<%= company_id %>">
+
             <input
               id="notification-percent_swing"
               name="notification[percent_swing]"
               type="text"
               value="<%= @user.notification_value(company_id) %>">
+
             <input type="submit" value="Set">
+            
           </form>
         <% end %>
       </td>
