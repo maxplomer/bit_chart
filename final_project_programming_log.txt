@@ -373,3 +373,7 @@ later might have scheduled trade feature
 user has many trades association, display trades on users show page
 
 wanna make sure if is our list of companies
+
+/////////////////////////////////
+
+note: don't want people to place trades with 0 shares, put validation in trade file?

@@ -39,22 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def profit
-
-    #copy trades 
-    temp_trades = []
-    self.trades.dup.each { |trade| temp_trades.push(trade) }
-
-    # temporarily close all positions
-    self.portfolio.keys.each do |company_id|
-      temp_trades.push(
-        Trade.new(
-          user_id: self.id,
-          company_id: company_id, 
-          num_shares: -self.portfolio[company_id], 
-          price: Company.find(company_id).quotes.last.price
-        )
-      )
-    end
+    temp_trades = get_temp_trades
 
     result = 0
     temp_trades.each do |trade|
@@ -64,6 +49,24 @@ class User < ActiveRecord::Base
     result
   end
 
+  def percent_gain
+    temp_trades = get_temp_trades
+
+    numer = 0
+    denom = 0
+
+    temp_trades.each do |trade|
+      value = trade.num_shares * trade.price
+
+      if trade.num_shares < 0
+        numer -= value
+      else
+        denom += value
+      end
+    end
+
+    truncate(((numer / denom) - 1) * 100)
+  end
 
   #auth
 
@@ -98,4 +101,29 @@ class User < ActiveRecord::Base
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token
   end
+
+  def get_temp_trades
+    #copy trades 
+    result = []
+    self.trades.dup.each { |trade| result.push(trade) }
+
+    # temporarily close all positions
+    self.portfolio.keys.each do |company_id|
+      result.push(
+        Trade.new(
+          user_id: self.id,
+          company_id: company_id, 
+          num_shares: -self.portfolio[company_id], 
+          price: Company.find(company_id).quotes.last.price
+        )
+      )
+    end
+
+    result
+  end
+
+  def truncate(x)
+    (x * 100).floor / 100.0
+  end
+
 end
