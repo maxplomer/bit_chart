@@ -14,4 +14,9 @@ change = <%= quote.change %>
 
 percent change = <%= quote.percent_change %>
 
-<p>Hello, dear company!</p>
+<h2> quote price data </h2>
+
+<% data = [] %>
+<% @company.quotes.each {|quote| data.push(quote.price)} %>
+<%= data %>
+
