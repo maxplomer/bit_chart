@@ -19,6 +19,8 @@ class Quote < ActiveRecord::Base
         Quote.create(company_id: company_id, price: price, change: change)
       end
     end
+
+    Notification.generate_messages
   end
 
   def percent_change
