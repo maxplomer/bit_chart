@@ -64,7 +64,7 @@
       <td><%= Company.find(company_id).quotes.last.price %></td>
       <td>
         <% if flag %> 
-          <form action="<%= user_notifications_url(@user) %>" method"post">
+          <form action="<%= user_notifications_url(@user) %>" method="post">
             <input
               id="notification-percent_swing"
               name="notification[percent_swing]"
