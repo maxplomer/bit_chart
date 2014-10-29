@@ -12,7 +12,7 @@ class RecentQuotesController < ApplicationController
       # want to delete recent recent_quote duplicates
       # find same company previously and destroy 
       duplicate = RecentQuote.where(user_id: params[:user_id], company_id: company.id)
-      duplicate[0].destroy unless duplicate.nil?
+      duplicate[0].destroy unless duplicate[0].nil?
 
       RecentQuote.create(user_id: params[:user_id], company_id: company.id)
       # might be better to just update the timestamps
