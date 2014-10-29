@@ -42,6 +42,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    @users = User.all
+    @users.sort! { |a,b| b.percent_gain <=> a.percent_gain }
+  end
+
   private
 
   def user_params
