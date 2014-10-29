@@ -5,6 +5,25 @@
   </head>
   <body>
 
+    <h1> Get a quote </h1>
+    <% action = (signed_in? ? user_recent_quotes_url(current_user) : recent_quotes_url) %>    
+    <form action="<%= action  %>" method="post">
+      <input
+        name="authenticity_token"
+        type="hidden"
+        value="<%= form_authenticity_token %>">
+
+      <label for="recent_quote_symbol">Stock symbol</label>
+      <input
+        id="recent_quote_symbol"
+        name="recent_quote[symbol]"
+        type="text">
+
+      <input type="submit" value="Search">
+    </form>
+
+    <br>
+
     <% if signed_in? %>
     <ul>
       <li>Signed in as: <%= current_user.email %></li>

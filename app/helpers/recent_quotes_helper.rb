@@ -1,0 +1,2 @@
+module RecentQuotesHelper
+end

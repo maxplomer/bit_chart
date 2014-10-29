@@ -1,10 +1,13 @@
 FinanceClone::Application.routes.draw do
   resources :users, :only => [:create, :new, :show, :edit, :update, :index] do 
     resources :trades, :only => [:create]
+    resources :recent_quotes, :only => [:create]
   end
   resource :session, :only => [:create, :destroy, :new]
 
   resources :companies, :only => [:show]
+  
+  resources :recent_quotes, :only => [:create]
 
   root :to => "users#new"
 end

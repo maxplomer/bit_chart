@@ -377,3 +377,11 @@ wanna make sure if is our list of companies
 /////////////////////////////////
 
 note: don't want people to place trades with 0 shares, put validation in trade file?
+
+
+
+
+don't create recent quotes if we don't have that stock ticker, redirect to root
+
+
+put plug sign in front of percent gain on user show page
