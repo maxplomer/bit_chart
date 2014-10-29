@@ -3,6 +3,37 @@
 <h1><%= @user.email %></h1>
 
 
+<% if signed_in? && current_user.id != @user.id %>
+
+  <% if current_user.follows?(@user) %>
+    <% follow = Follow.where(follower_id: current_user.id, leader_id: @user.id) %>
+  <% end %>
+
+  <% action = (current_user.follows?(@user) ? user_follow_url(current_user.id, follow.id) : user_follows_url(current_user)) %>
+  <% method = (current_user.follows?(@user) ? "delete" : "post") %>
+  <% message = (current_user.follows?(@user) ? "Unfollow" : "Follow") %>
+
+  <form action="<%= action %>" method="post">
+    <input
+      name="_method"
+      type="hidden"
+      value="<%= method %>">
+    <input
+      name="authenticity_token"
+      type="hidden"
+      value="<%= form_authenticity_token %>">
+    <input
+      id="follow_leader_id"
+      name="follow[leader_id]"
+      type="hidden"
+      value="<%= @user.id %>">
+    <input type="submit" value="<% message %>">
+  </form>
+<% end %>
+
+
+
+
 <% if signed_in? && current_user.id == @user.id %>
 
 <h2>Make a trade</h2>

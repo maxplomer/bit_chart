@@ -425,3 +425,9 @@ need to explore how the ask and change are at night, make sure notifications are
 
 
 seeded notification messages, now need to create that index page nested in users
+
+
+
+///////////////////
+
+going to have user assoc for follows and through assoc for follow_users
