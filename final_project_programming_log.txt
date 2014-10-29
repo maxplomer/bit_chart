@@ -385,3 +385,8 @@ don't create recent quotes if we don't have that stock ticker, redirect to root
 
 
 put plug sign in front of percent gain on user show page, also do that on change and percent change on company show page
+
+would prefer when error "we dont trade that ticker" is given, should render page already on! (last recent quote if signed in, otherwise root?, or have recent quotes for users not signed in)
+
+even when click follow only, still show yourself
+
