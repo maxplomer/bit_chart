@@ -13,6 +13,13 @@ class User < ActiveRecord::Base
     foreign_key: :user_id,
     dependent: :destroy
   )
+
+  has_many(
+    :recent_quotes,
+    class_name: "RecentQuote",
+    foreign_key: :user_id,
+    dependent: :destroy
+  )
    
   def portfolio
     result = Hash.new(0)

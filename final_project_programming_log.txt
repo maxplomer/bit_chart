@@ -384,4 +384,4 @@ note: don't want people to place trades with 0 shares, put validation in trade f
 don't create recent quotes if we don't have that stock ticker, redirect to root
 
 
-put plug sign in front of percent gain on user show page
+put plug sign in front of percent gain on user show page, also do that on change and percent change on company show page

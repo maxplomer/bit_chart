@@ -21,6 +21,42 @@
 
       <input type="submit" value="Search">
     </form>
+    <% if signed_in? %>
+      <h2>Recent quotes</h2>
+
+      <table>
+        <th>Symbol</th>
+        <th>Price</th>
+        <% counter = 0 %>
+        <% current_user.recent_quotes.reverse.each do |quote| %>
+          <tr>
+            <td>
+              <% company = Company.find(quote.company_id)%>
+
+              <form action="<%= user_recent_quotes_url(current_user)  %>" method="post">
+                <input
+                  name="authenticity_token"
+                  type="hidden"
+                  value="<%= form_authenticity_token %>">
+
+                <input
+                  id="recent_quote_symbol"
+                  name="recent_quote[symbol]"
+                  type="hidden"
+                  value="<%= company.symbol %>">
+
+                <input type="submit" value="<%= company.symbol %>">
+              </form>
+
+            </td>
+            <td>&#36;<%= company.quotes.last.price %></td>
+          </tr>
+          <% counter += 1 %>
+          <% break if counter == 10 %>
+        <% end %>
+      </table>
+
+    <% end %>
 
     <br>
 
