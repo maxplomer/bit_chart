@@ -13,7 +13,7 @@ class Quote < ActiveRecord::Base
       company_id = company.id
 
       stock = StockQuote::Stock.quote(company.symbol)
-      price = stock.ask_realtime
+      price = stock.bid_realtime
       change = stock.change_realtime
 
       Quote.create(company_id: company_id, price: price, change: change)
