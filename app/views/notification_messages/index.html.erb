@@ -1,0 +1,9 @@
+<h1>Notification Messages</h1>
+
+<ul>
+  <% @notification_messages.each do |msg| %>
+    <li>
+      <%= msg.message %>
+    </li>
+  <% end %>
+</ul>

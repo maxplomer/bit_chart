@@ -27,6 +27,13 @@ class User < ActiveRecord::Base
     foreign_key: :user_id,
     dependent: :destroy
   )
+
+  has_many(
+    :notification_messages,
+    class_name: "NotificationMessage",
+    foreign_key: :user_id,
+    dependent: :destroy
+  )
    
   def notification_value(company_id)
     notification = self.notifications.find_by_company_id(company_id)
