@@ -401,3 +401,23 @@ will look for at any time for the absolute value of percent change to be greater
 want to make sure doesn't trigger an error when set 0 and no notification already set
 
 need to attach to update_quotes, that we also go through and check alerts to see if any triggered, might want to create an notification message model and then delete noticiation
+
+
+/////////////////////////////////
+
+
+probably want an index page for 
+
+/users/1/notification_message/index.html
+
+notification_message
+
+bug: creating notification with percent_swing 0.0
+
+want to send email with alerts
+
+my model should be related alert and alert_message (its ok because alert and notification are synonyms)
+
+
+
+

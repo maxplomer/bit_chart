@@ -19,7 +19,7 @@ class NotificationsController < ApplicationController
 	    percent_swing: percent_swing
 	  )
 
-	  if @notification.save && percent_swing != 0
+	  if percent_swing != 0.0 && @notification.save 
 	    redirect_to user_url(current_user)
 	  else
 	    flash[:errors] = ["Notification save error"]
