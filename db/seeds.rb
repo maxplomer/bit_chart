@@ -40,11 +40,11 @@ Trade.create(user_id: 1, company_id: 3, num_shares: -100, price: 25)
 # need some sample notification_messages
 NotificationMessage.create(
   user_id: 1, 
-  message: "APPL triggered +4% alert"
+  message: "APPL triggered +4.0% alert"
 )
 NotificationMessage.create(
   user_id: 1, 
-  message: "GOOG triggered -3% alert"
+  message: "GOOG triggered -3.0% alert"
 )
 
 
