@@ -13,16 +13,7 @@ class User < ActiveRecord::Base
     foreign_key: :user_id,
     dependent: :destroy
   )
-
-# want to create a table like so
-#company_id  share   
-#   1         10     
-
-# when calc profit/ percent
-# don't use portfolio table, use transaction history
-#do algorithm to temp add closing positions then use 
-#equations for profit/percent 
-
+   
   def portfolio
     result = Hash.new(0)
     self.trades.each do |trade|
@@ -37,6 +28,11 @@ class User < ActiveRecord::Base
 
     result
   end
+
+  # when calc profit/ percent
+  # don't use portfolio table, use transaction history
+  #do algorithm to temp add closing positions then use 
+  #equations for profit/percent 
 
   def profit
     temp_trades = get_temp_trades
@@ -64,8 +60,12 @@ class User < ActiveRecord::Base
         denom += value
       end
     end
-
-    truncate(((numer / denom) - 1) * 100)
+    
+    if denom == 0
+      0
+    else
+      truncate(((numer / denom) - 1) * 100)
+    end
   end
 
   #auth
