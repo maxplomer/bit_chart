@@ -6,7 +6,7 @@
 <% if signed_in? && current_user.id != @user.id %>
 
   <% if current_user.follows?(@user) %>
-    <% follow = Follow.where(follower_id: current_user.id, leader_id: @user.id) %>
+    <% follow = Follow.where(follower_id: current_user.id, leader_id: @user.id)[0] %>
   <% end %>
 
   <% action = (current_user.follows?(@user) ? user_follow_url(current_user.id, follow.id) : user_follows_url(current_user)) %>
