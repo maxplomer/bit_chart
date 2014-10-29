@@ -376,7 +376,7 @@ wanna make sure if is our list of companies
 
 /////////////////////////////////
 
-note: don't want people to place trades with 0 shares, put validation in trade file?
+!!!!!! note: don't want people to place trades with 0 shares, put validation in trade file?
 
 
 
@@ -390,3 +390,12 @@ would prefer when error "we dont trade that ticker" is given, should render page
 
 even when click follow only, still show yourself
 
+
+/////////////////////////////////
+
+once notifications trigger themselves, then destroy
+
+will look for at any time for the absolute value of percent change to be greater than the tolerance
+
+
+want to make sure doesn't trigger an error when set 0 and no notification already set

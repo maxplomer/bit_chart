@@ -20,7 +20,23 @@ class User < ActiveRecord::Base
     foreign_key: :user_id,
     dependent: :destroy
   )
+
+  has_many(
+    :notifications,
+    class_name: "Notification",
+    foreign_key: :user_id,
+    dependent: :destroy
+  )
    
+  def notification_value(company_id)
+    notification = self.notifications.find_by_company_id(company_id)
+    if notification.nil?
+      0
+    else
+      notification.percent_swing
+    end
+  end
+
   def portfolio
     result = Hash.new(0)
     self.trades.each do |trade|

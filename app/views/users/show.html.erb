@@ -49,15 +49,31 @@
 
 
 <h2> Portfolio </h2>
+<% flag = signed_in? && current_user.id == @user.id %>
 <table>
   <th>Company</th>
   <th>Number of Shares</th>
   <th>Current price</th>
+  <% if flag %> 
+    <th>Notification</th>
+  <% end %>
   <% @user.portfolio.keys.each do |company_id| %>
     <tr>
       <td><%= Company.find(company_id).symbol %></td>
       <td><%= @user.portfolio[company_id] %></td>
       <td><%= Company.find(company_id).quotes.last.price %></td>
+      <td>
+        <% if flag %> 
+          <form action="<%= user_notifications_url(@user) %>" method"post">
+            <input
+              id="notification-percent_swing"
+              name="notification[percent_swing]"
+              type="text"
+              value="<%= @user.notification_value(company_id) %>">
+            <input type="submit" value="Set">
+          </form>
+        <% end %>
+      </td>
     </tr>
   <% end %>
 </table>
