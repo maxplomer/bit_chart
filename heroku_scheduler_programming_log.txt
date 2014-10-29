@@ -1,0 +1,38 @@
+following this guide:
+
+https://devcenter.heroku.com/articles/scheduler
+
+navigated to app root
+
+run in terminal (after verifying credit card)
+
+$ heroku addons:add scheduler:standard
+
+output: 
+
+Adding scheduler:standard on finance-clone... done, v6 (free)
+This add-on consumes dyno hours, which could impact your monthly bill. To learn more:
+http://devcenter.heroku.com/addons_with_dyno_hour_usage
+To manage scheduled jobs run:
+heroku addons:open scheduler
+Use `heroku addons:docs scheduler` to view documentation.
+
+
+next step:
+
+For Rails, the convention is to set up rake tasks. To create your scheduled tasks in Rails, copy the code below into lib/tasks/scheduler.rake and customize it to fit your needs.
+
+desc "This task is called by the Heroku scheduler add-on"
+task :update_feed => :environment do
+  puts "Updating feed..."
+  NewsFeed.update
+  puts "done."
+end
+
+task :send_reminders => :environment do
+  User.send_reminders
+end
+
+
+
+

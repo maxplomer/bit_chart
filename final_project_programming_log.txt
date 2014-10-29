@@ -338,3 +338,21 @@ could grab all quotes in an array!!!!
 stocks = StockQuote::Stock.quote(["aapl", "tsla"])
 much better, do this before portfolio page?
 
+
+/////////////////////////////////
+
+
+
+deploy to heroku
+
+$ heroku git:remote -a finance-clone
+$ git push heroku master
+$ heroku run bundle exec rake db:migrate db:seed
+
+
+need to run cron job thing
+
+
+upload to github
+$ git remote add origin https://github.com/maxplomer/finance-clone.git
+$ git push -u origin master
