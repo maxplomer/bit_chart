@@ -418,6 +418,10 @@ want to send email with alerts
 
 my model should be related alert and alert_message (its ok because alert and notification are synonyms)
 
+notification_message:  string: message, integer: user_id
 
 
+need to explore how the ask and change are at night, make sure notifications aren't triggered at wrong times
 
+
+seeded notification messages, now need to create that index page nested in users

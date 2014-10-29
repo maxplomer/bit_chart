@@ -34,3 +34,22 @@ Trade.create(user_id: 1, company_id: 1, num_shares: 100, price: 95.42)
 Trade.create(user_id: 1, company_id: 2, num_shares: -100, price: 295.23)
 Trade.create(user_id: 1, company_id: 3, num_shares: 100, price: 25)
 Trade.create(user_id: 1, company_id: 3, num_shares: -100, price: 25)
+
+
+
+# need some sample notification_messages
+NotificationMessage.create(
+  user_id: 1, 
+  message: "APPL triggered +4% alert"
+)
+NotificationMessage.create(
+  user_id: 1, 
+  message: "GOOG triggered -3% alert"
+)
+
+
+
+
+
+
+
