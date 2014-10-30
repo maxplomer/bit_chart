@@ -1,4 +1,5 @@
 FinanceClone::Application.routes.draw do
+  get "static_pages/home"
   resources :users, :only => [:create, :new, :show, :edit, :update, :index] do 
     resources :trades, :only => [:create]
     resources :recent_quotes, :only => [:create]
@@ -12,7 +13,7 @@ FinanceClone::Application.routes.draw do
   
   resources :recent_quotes, :only => [:create]
 
-  root :to => "users#new"
+  root :to => "sessions#new"
 end
 
 
