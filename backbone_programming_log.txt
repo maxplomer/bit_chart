@@ -1,0 +1,13 @@
+refresh button on user and company show pages
+
+add:
+gem 'backbone-on-rails'
+
+#Generating basic js/backbone functionality
+rails generate backbone:install --javascript
+
+#Generating Company model functionality
+rails generate backbone:scaffold Company --javascript
+
+remove //= require turbolinks
+

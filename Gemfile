@@ -67,3 +67,5 @@ gem 'active_median', '~> 0.1.0'
 
 #maybe this will fix highcharts not working on heroku
 gem 'rails_12factor', group: :production
+
+gem 'backbone-on-rails'
