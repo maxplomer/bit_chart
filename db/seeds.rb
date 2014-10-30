@@ -12,7 +12,7 @@ Company.create(name: "Google", symbol: "GOOG")
 
 User.create(name: "Max", email: "maxplomer@gmail.com", password: "123456")
 User.create(name: "helloworld", email: "helloworld", password: "helloworld")
-User.create(name: "sennacy", email: "sennacy@catworld.gov", password: "helloworld")
+
 
 # restart db 
 # rake db:drop db:create:all db:migrate db:seed
@@ -49,6 +49,23 @@ User.create(name: "sennacy", email: "sennacy@catworld.gov", password: "helloworl
 #   user_id: 1, 
 #   message: "GOOG triggered -3.0% alert"
 # )
+
+# need to test profit graph, works best during trading day
+user = User.new(name: "sennacy", email: "sennacy@catworld.gov", password: "helloworld")
+user.created_at = Time.now - 2.day
+user.save
+
+trade = Trade.new(user_id: 3, company_id: 1, num_shares: 100, price: 106.0)
+trade.created_at = Time.now - 2.day + 20.minutes
+trade.save
+
+quote = Quote.new(company_id: 1, price: 106.0, change: 1.63)
+quote.created_at = Time.now - 2.day + 20.minutes
+quote.save
+
+quote = Quote.new(company_id: 1, price: 107.32, change: 1.63)
+quote.created_at = Time.now - 1.day + 20.minutes
+quote.save
 
 
 

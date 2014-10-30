@@ -230,7 +230,7 @@ class User < ActiveRecord::Base
         )
       )
     end
-    fail
+    
     result
   end
 
