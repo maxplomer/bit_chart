@@ -3,3 +3,8 @@ root to session new as it already is
 
 have static front page with content in middle, my portfolio on right
 
+
+drop down menu for edit account signout buttons thing
+
+
+want errors at very top of page

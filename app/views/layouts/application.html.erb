@@ -13,8 +13,21 @@
     
   </head>
   <body>
+    <!-- Errors - start -->
+    <% if flash[:errors] %>
+    <h3>Please fix the following errors:</h3>
+    <ul>
+      <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+      <% end %>
+    </ul>
+    <br>
+    <% end %>
+    <!-- Errors - end -->
 
-    <h1> Get a quote </h1>
+    <h1>Finance Clone</h1>
+
+    <!-- Get a quote - start -->
     <% action = (signed_in? ? user_recent_quotes_url(current_user) : recent_quotes_url) %>    
     <form action="<%= action  %>" method="post">
       <input
@@ -22,14 +35,46 @@
         type="hidden"
         value="<%= form_authenticity_token %>">
 
-      <label for="recent_quote_symbol">Stock symbol</label>
       <input
         id="recent_quote_symbol"
         name="recent_quote[symbol]"
-        type="text">
+        type="text"
+        placeholder="enter stock ticker">
 
       <input type="submit" value="Search">
     </form>
+    <!-- Get a quote - end -->
+
+    <br>
+
+    <!-- Alerts - start -->
+    <% if signed_in? %>
+      <%= link_to "Alerts", user_notification_messages_url(current_user) %>
+    <% else %>
+      <%= link_to "Alerts", new_session_url %>
+    <% end %>
+    <!-- Alerts - end -->
+
+    <br>
+
+    <!-- Edit Account - start -->
+    <% if signed_in? %>
+    <ul>
+      <li>Signed in as: <%= current_user.email %></li>
+      <li><%= link_to "Edit Account", edit_user_url(current_user) %></li>
+      <li><%= button_to "Sign Out", session_url, :method => :delete %></li>
+    </ul>
+    <% else %>
+    <p>
+      <%= link_to "Sign In", new_session_url %> or
+      <%= link_to "Sign up", new_user_url %>
+    </p>
+    <% end %>
+    <!-- Edit Account - end -->
+
+    <hr>
+
+    <!-- Recent quotes - start -->
     <% if signed_in? %>
       <h2>Recent quotes</h2>
 
@@ -66,40 +111,12 @@
       </table>
 
     <% end %>
+    <!-- Recent quotes - end -->
 
     <br>
 
-    <% if signed_in? %>
-      <%= link_to "Alerts", user_notification_messages_url(current_user) %>
-    <% else %>
-      <%= link_to "Alerts", new_session_url %>
-    <% end %>
 
-    <br>
 
-    <% if signed_in? %>
-    <ul>
-      <li>Signed in as: <%= current_user.email %></li>
-      <li><%= link_to "Edit Account", edit_user_url(current_user) %></li>
-      <li><%= button_to "Sign Out", session_url, :method => :delete %></li>
-    </ul>
-    <% else %>
-    <p>
-      <%= link_to "Sign In", new_session_url %> or
-      <%= link_to "Sign up", new_user_url %>
-    </p>
-    <% end %>
-
-    <hr>
-
-    <% if flash[:errors] %>
-    <h3>Please fix the following errors:</h3>
-    <ul>
-      <% flash[:errors].each do |error| %>
-      <li><%= error %></li>
-      <% end %>
-    </ul>
-    <% end %>
 
     <%= yield %>
 
