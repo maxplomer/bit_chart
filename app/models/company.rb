@@ -18,5 +18,14 @@ class Company < ActiveRecord::Base
     return nil
   end
 
+  def price_graph_data_hash
+    data = {} 
+
+    self.quotes.each do |quote| 
+      data[quote.created_at.time] = quote.price 
+    end 
+
+    return data
+  end
 
 end

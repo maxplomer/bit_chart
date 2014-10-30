@@ -13,20 +13,13 @@ change = <%= quote.change %>
 <br>
 
 percent change = <%= quote.percent_change %>
+
 <br>
 
-<!-- move calc to company model -->
-<% data = {} %>
-<% counter = 0 %>
-<% @company.quotes.each do |quote| %>
-  <% data[quote.created_at.time] = quote.price %>
-  <% counter += 1 %>
-<% end %>
+<h3>Price movement</h3>
 
-  <!-- Line Chart - Single Series -->
-  <!-- move chart generation entirely to company model -->
-    <h3>Price movement</h3>
-    <%= line_chart(data, min: data.values.min, max: data.values.max, height: "400px") %>
+<% data = @company.price_graph_data_hash %>
+<%= line_chart(data, min: data.values.min, max: data.values.max, height: "400px") %>
 
  
 
