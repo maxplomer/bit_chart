@@ -64,3 +64,6 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'chartkick', '~> 1.2.4'
 gem 'groupdate', '~> 2.1.1'
 gem 'active_median', '~> 0.1.0'
+
+#maybe this will fix highcharts not working on heroku
+gem 'rails_12factor', group: :production
