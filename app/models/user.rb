@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
     while true
       time += 1.day
 
-      break if time > now
+      break if time > (now + 12.hours)
 
       data[time] = self.profit_date(time)
     end
