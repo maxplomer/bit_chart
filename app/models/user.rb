@@ -53,6 +53,20 @@ class User < ActiveRecord::Base
     class_name: "Follow",
     foreign_key: :leader_id,
   )
+
+  def profit_graph_data_hash
+    data = {}
+    time = self.trades.first.created_at.time
+    data[time] = 0
+    now = Time.new
+    while true
+      time += 1.day
+      data[time] = 1
+      break if time > now
+    end
+
+    return data
+  end
    
   def follows?(user) 
     self.users_they_follow.include?(user)

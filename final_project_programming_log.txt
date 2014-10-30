@@ -474,4 +474,6 @@ might be nice to have buttons to show 1day 1week 1month
 
 portfolio graph
 
+basic links
+
  

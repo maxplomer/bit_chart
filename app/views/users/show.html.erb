@@ -132,6 +132,17 @@
 
 <%= @user.percent_gain %> &#37;
 
+<h2> Profit graph </h2>
+
+<% data = @user.profit_graph_data_hash %>
+<%= line_chart(data, min: data.values.min, max: data.values.max, height: "400px") %>
+
+
+
+<%# go through the quotes for each stock owned %>
+
+<%# just do each day from first transaction, %>
+
 
 
 
