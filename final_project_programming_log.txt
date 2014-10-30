@@ -435,3 +435,21 @@ going to have user assoc for follows and through assoc for follow_users
 do refactoring, basic navigation, don't do charts in rails, start backbone
 
 would be nice to have graph for stock and portfolio though
+
+
+instead of error "we don't trade after hours" just say ask is nil
+
+
+if want to totally fix quotes, only buy at ask price and sell at buy price
+
+
+
+
+/////////////////charts
+
+links to help get charts to work
+
+
+http://richonrails.com/articles/charting-with-chartkick
+https://github.com/ankane/chartkick
+http://api.highcharts.com/highcharts
