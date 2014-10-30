@@ -453,3 +453,6 @@ links to help get charts to work
 http://richonrails.com/articles/charting-with-chartkick
 https://github.com/ankane/chartkick
 http://api.highcharts.com/highcharts
+
+
+might be nice to have buttons to show 1day 1week 1month
