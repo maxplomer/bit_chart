@@ -9,5 +9,5 @@ window.FinanceClone = {
 };
 
 $(document).ready(function(){
-  FinanceClone.initialize();
+  //FinanceClone.initialize();
 });
