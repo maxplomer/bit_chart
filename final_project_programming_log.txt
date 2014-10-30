@@ -456,3 +456,22 @@ http://api.highcharts.com/highcharts
 
 
 might be nice to have buttons to show 1day 1week 1month
+
+
+
+
+/////////// TODO
+-my pulling of quote is flawed, just only pull quotes 9:30 - 4pm, can modify update quotes to just return if sat/sun or not in that time period
+
+
+-it terms of buy/sell same thing, have to have an ask price and in the right time period
+
+
+-move graph generation to model files
+
+-add 1 day 1 week 1 month, all to graphs
+
+
+portfolio graph
+
+ 

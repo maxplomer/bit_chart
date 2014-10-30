@@ -24,7 +24,9 @@ percent change = <%= quote.percent_change %>
 <% end %>
 
   <!-- Line Chart - Single Series -->
-  
+  <!-- move chart generation entirely to company model -->
     <h3>Price movement</h3>
-    <%= line_chart data, min: data.values.min, max: data.values.max, height: "400px" %>
+    <%= line_chart(data, min: data.values.min, max: data.values.max, height: "400px") %>
+
  
+
