@@ -7,6 +7,8 @@ class Quote < ActiveRecord::Base
   )
 
   def self.update_quotes
+    return unless during_day?
+    
     companies = Company.all;
 
     companies.each do |company|

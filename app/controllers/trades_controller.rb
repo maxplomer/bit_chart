@@ -10,8 +10,11 @@ class TradesController < ApplicationController
     if company.nil?
       flash[:errors] = ["We don't trade that ticker"]
       redirect_to user_url(current_user)
-    elsif price.nil?
+    elsif !during_day?
       flash[:errors] = ["We don't trade after hours"]
+      redirect_to user_url(current_user)
+    elsif price.nil?
+      flash[:errors] = ["The price is nil"]
       redirect_to user_url(current_user)
     else
       num_shares = params["trade"]["num_shares"]
