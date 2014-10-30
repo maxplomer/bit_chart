@@ -4,6 +4,7 @@
 
 <% quote = @company.quotes.last %>
 <% flag = (quote.change > 0 ? "+" : "-") %>
+<% flag = "" if quote.change == 0 %>
 
 <table>
 
