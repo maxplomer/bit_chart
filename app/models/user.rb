@@ -61,7 +61,8 @@ class User < ActiveRecord::Base
     now = Time.new
     while true
       time += 1.day
-      data[time] = 1
+
+      data[time] = self.profit_date(time)
       break if time > now
     end
 
@@ -104,6 +105,17 @@ class User < ActiveRecord::Base
 
   def profit
     temp_trades = get_temp_trades
+
+    result = 0
+    temp_trades.each do |trade|
+      result -= trade.num_shares * trade.price
+    end
+
+    result
+  end
+
+  def profit_date(time)
+    temp_trades = get_temp_trades_date(time)
 
     result = 0
     temp_trades.each do |trade|
@@ -173,7 +185,7 @@ class User < ActiveRecord::Base
   def get_temp_trades
     #copy trades 
     result = []
-    self.trades.dup.each { |trade| result.push(trade) }
+    self.trades.each { |trade| result.push(trade) }
 
     # temporarily close all positions
     self.portfolio.keys.each do |company_id|
@@ -192,6 +204,30 @@ class User < ActiveRecord::Base
 
   def truncate(x)
     (x * 100).floor / 100.0
+  end
+
+  def get_temp_trades_date(time)
+    #copy trades 
+    result = []
+    self.trades.each do |trade| 
+      trade_time = trade.created_at.time
+      break if trade_time > (time + 12.hours)
+      result.push(trade) 
+    end
+
+    # temporarily close all positions
+    self.portfolio.keys.each do |company_id|
+      result.push(
+        Trade.new(
+          user_id: self.id,
+          company_id: company_id, 
+          num_shares: -self.portfolio[company_id], 
+          price: Company.find(company_id).find_price_from_day(time)
+        )
+      )
+    end
+
+    result
   end
 
 end
