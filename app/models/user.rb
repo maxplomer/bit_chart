@@ -56,14 +56,18 @@ class User < ActiveRecord::Base
 
   def profit_graph_data_hash
     data = {}
+
+    return data if self.trades.length == 0
+
     time = self.trades.first.created_at.time
     data[time] = 0
     now = Time.new
     while true
       time += 1.day
 
-      data[time] = self.profit_date(time)
       break if time > now
+
+      data[time] = self.profit_date(time)
     end
 
     return data
@@ -226,7 +230,7 @@ class User < ActiveRecord::Base
         )
       )
     end
-
+    fail
     result
   end
 

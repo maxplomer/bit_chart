@@ -10,7 +10,7 @@ class TradesController < ApplicationController
     if company.nil?
       flash[:errors] = ["We don't trade that ticker"]
       redirect_to user_url(current_user)
-    elsif !during_day?
+    elsif !Quote.during_day?
       flash[:errors] = ["We don't trade after hours"]
       redirect_to user_url(current_user)
     elsif price.nil?
@@ -33,23 +33,6 @@ class TradesController < ApplicationController
         redirect_to user_url(current_user)
       end
     end
-  end
-
-  private
-
-  # for trading and saving stock quotes
-  def during_day?
-    now = Time.new
-    if now.saturday? || now.sunday?
-      return false
-    end 
-
-    #convert time to integer
-    now_integer = now.hour * 60 + now.min
-    open = 9 * 60 + 30                    # 9:30 am
-    close = 16 * 60                       # 4pm
-
-    now_integer.between?(open, close)
   end
 
 end
