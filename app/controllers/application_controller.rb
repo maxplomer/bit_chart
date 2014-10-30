@@ -35,19 +35,4 @@ class ApplicationController < ActionController::Base
     redirect_to user_url(current_user) if signed_in?
   end
 
-  # for trading and saving stock quotes
-  def during_day?
-    now = Time.new
-    if now.saturday? || now.sunday?
-      return false
-    end 
-
-    #convert time to integer
-    now_integer = now.hour * 60 + now.min
-    open = 9 * 60 + 30                    # 9:30 am
-    close = 16 * 60                       # 4pm
-
-    now_integer.between?(open, close)
-  end
-
 end
