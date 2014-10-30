@@ -2,6 +2,22 @@
 
 <h1><%= @user.email %></h1>
 
+<% flag = (@user.profit > 0 ? "+" : "-") %>
+<table>
+
+  <tr>
+   <td>Profit</td>
+   <td>&nbsp;  <%= flag %> &#36;<%= @user.profit.abs %></td>
+  <tr>
+
+  <tr>
+   <td>&#37; Gain</td>
+   <td>&nbsp; <%= flag %> <%= @user.percent_gain.abs %>&#37;</td>
+  <tr>
+
+</table>
+
+
 <% if signed_in? && current_user.id != @user.id %>
 
   <% if current_user.follows?(@user) %>
@@ -121,15 +137,6 @@
     </tr>
   <% end %>
 </table>
-
-
-<h2> Profit </h2>
-
-&#36; <%= @user.profit %>
-
-<h2> Percent gain </h2>
-
-<%= @user.percent_gain %> &#37;
 
 <h2> Profit graph </h2>
 

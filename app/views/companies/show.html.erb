@@ -3,20 +3,30 @@
 <h1><%= @company.symbol %></h1>
 
 <% quote = @company.quotes.last %>
+<% flag = (quote.change > 0 ? "+" : "-") %>
 
-price = <%= quote.price %>
+<table>
+
+  <tr>
+   <td>Price</td>
+   <td>&nbsp; &#36; <%= quote.price %></td>
+  <tr>
+
+  <tr>
+   <td>Change</td>
+   <td>&nbsp; <%= flag %> &#36;<%= quote.change.abs %></td>
+  <tr>
+
+  <tr>
+   <td>&#37; Change</td>
+   <td>&nbsp; <%= flag %> <%= quote.percent_change.abs %>&#37;</td>
+  <tr>
+
+</table>
 
 <br>
 
-change = <%= quote.change %>
-
-<br>
-
-percent change = <%= quote.percent_change %>
-
-<br>
-
-<h3>Price movement</h3>
+<h3>Chart</h3>
 
 <% data = @company.price_graph_data_hash %>
 <%= line_chart(data, min: data.values.min, max: data.values.max, height: "400px") %>
