@@ -88,8 +88,8 @@ header li a {
 .menu {
   display: none;
   position: absolute;
-  background: white;
-  left: -3px;
+  background: rgb(229,229,229);
+  left: -60px;
   border-top: solid grey;
 }
 

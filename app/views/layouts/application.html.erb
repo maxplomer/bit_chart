@@ -38,11 +38,33 @@
       <li class="dropdown">
         <a>Alerts</a>
 
+        <% if signed_in? %>
+        <% @notification_messages = current_user.notification_messages %>
         <ul class="menu">
-          <li>Someone liked your picture.</li>
-          <li>You have a new friend request.</li>
-          <li>Welcome to App Academy.</li>
+          <% @notification_messages.reverse.each do |msg| %>
+            <li><%= msg.message %></li>
+          <% end %>
         </ul>
+
+        <% end %>
+
+        <!-- <table class="menu table table-condensed">
+        <tr><td>Someone liked your picture.</td></tr>
+        <tr><td>You have a new friend request.</td></tr>
+        <tr><td>Welcome to App Academy.</td></tr>
+        </table> -->
+
+
+      <!--   <table class="table table-condensed">
+          <% @notification_messages.reverse.each do |msg| %>
+            <tr>
+              <td><%= msg.message %></td>
+            </tr>
+          <% end %>
+        </table> -->
+
+
+
 
       </li>
       <li class="dropdown">
