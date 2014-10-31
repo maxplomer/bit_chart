@@ -1,15 +1,19 @@
-<h1> Leaderboard </h1>
+<h2> Leaderboard </h2> &nbsp;&nbsp;&nbsp;
 
 
-<table>
-  <th>Name</th>
-  <th>Percent gain</th>
+<a href="<%= users_url %>" class="btn btn-default">show all</a>
+
+
+<br><br>
+
+<table class="table table-condensed">
   <% @users.each do |user| %>
     <tr>
       <td><%= user.name %></td>
       <td>
-      	<%= "+" if user.percent_gain > 0 %><%= user.percent_gain %>&#37;
+         <%= "+" if user.percent_gain > 0 %><%= user.percent_gain %>&#37;
       </td>
+      <td><b><a href="<%= user_url(user) %>"><span>i</span></a></b></td>
     </tr>
   <% end %>
 </table>
