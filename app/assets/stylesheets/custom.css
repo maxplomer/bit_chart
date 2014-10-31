@@ -76,6 +76,7 @@ header li a {
 
 .dropdown {
   position: relative;
+  line-height: 2.5em;
 }
 
 .menu {
