@@ -78,8 +78,8 @@
 
       <td><%= @user.portfolio[company_id] %></td>
 
-      <td>
-        <% if flag %> 
+      <% if flag %> 
+        <td>
           <form action="<%= user_notifications_url(@user) %>" method="post">
 
             <input
@@ -102,8 +102,8 @@
             <input type="submit" value="Set">
             
           </form>
-        <% end %>
-      </td>
+        </td>
+      <% end %>
 
     </tr>
   <% end %>
