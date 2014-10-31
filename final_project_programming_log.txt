@@ -481,4 +481,15 @@ basic links
 ///////////////////
 
 git push -f ( force push )
+
+//////
+
+heroku custom.css file getting to work
+
+add
+
+config.assets.precompile += %w( custom.css)
  
+to
+
+production.rb
