@@ -80,6 +80,18 @@
 
 
     <hr>
+    <!-- Home menu - start -->
+
+    <a href="/static_pages/home" class="">Home</a> <br>
+    <% if signed_in? %>
+    <a href="<%= user_url(current_user) %>">My Portfolio</a> <br>
+    <% end %>
+    <a href="<%= users_url %>">Leaderboard</a>
+
+    <!-- Home menu - end -->
+    <hr>
+
+
 
     <!-- Recent quotes - start -->
     <% if signed_in? %>
