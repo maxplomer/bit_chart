@@ -40,6 +40,9 @@ body {
 
 .get-quote {
   padding-left: 100px;
+  position: absolute;
+  left: 220px;
+  top: 14px;
 }
 
 header {
