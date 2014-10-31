@@ -10,7 +10,7 @@
 
 <h2><%= quote.price %></h2>&nbsp;&nbsp;&nbsp;
 
-<font color="<%= (quote.change > 0) ? "green" : "red" %>" size="4">
+<font color="<%= (quote.change < 0) ? "red" : "green" %>" size="4">
   <%= "▲" if quote.change > 0 %>
   <%= "▼" if quote.change < 0 %>
   <%= quote.change.abs %>

@@ -1,24 +1,10 @@
-<h1><%= @user.name %></h1>
 
-<h1><%= @user.email %></h1>
+<h2>
+  <%= (signed_in? && current_user.id == @user.id) ? "My" : (@user.name + "'s") %> 
+  Portfolio
+</h2>&nbsp;&nbsp;&nbsp;
 
-<% flag = (@user.profit > 0 ? "+" : "-") %>
-<% flag = "" if @user.profit == 0 %>
-<table>
-
-  <tr>
-   <td>Profit</td>
-   <td>&nbsp;  <%= flag %> &#36;<%= @user.profit.abs %></td>
-  <tr>
-
-  <tr>
-   <td>&#37; Gain</td>
-   <td>&nbsp; <%= flag %> <%= @user.percent_gain.abs %>&#37;</td>
-  <tr>
-
-</table>
-
-
+<!-- follow or unfollow - start -->
 <% if signed_in? && current_user.id != @user.id %>
 
   <% if current_user.follows?(@user) %>
@@ -46,69 +32,52 @@
     <input type="submit" value="<%= message %>">
   </form>
 <% end %>
+<!-- follow or unfollow - end -->
 
+<br><br>
 
+<!-- profit percent gain - start -->
+<font color="<%= (@user.profit < 0) ? "red" : "green" %>" size="4">
+  <%= "▲" if @user.profit > 0 %>
+  <%= "▼" if @user.profit < 0 %>
+  &#36;<%= @user.profit.abs %>
+  (<%= @user.percent_gain.abs %>&#37;)
+</font>
+<!-- profit percent gain - end -->
 
+<br><br>
 
-<% if signed_in? && current_user.id == @user.id %>
-
-<h2>Make a trade</h2>
-
-<form action="<%= user_trades_url(@user) %>" method="post">
-  <input
-     name="authenticity_token"
-     type="hidden"
-     value="<%= form_authenticity_token %>">
-
-  <label for="trade_symbol">Stock symbol</label>
-  <input
-     id="trade_symbol"
-     name="trade[symbol]"
-     type="text">
-  <br>
-
-  <label for="trade_num_shares">Number of Shares (negative to short)</label>
-  <input
-     id="trade_num_shares"
-     name="trade[num_shares]"
-     type="text">
-  <br>
-
-  <input type="submit" value="Place trade">
-
-</form>
-
-<% end %>
-
-<h2> Trade history </h2>
-<table>
-  <th>Company</th>
-  <th>Number of Shares</th>
-  <th>Price</th>
-  <% @user.trades.each do |trade| %>
-    <tr>
-      <td><%= Company.find(trade.company_id).symbol %></td>
-      <td><%= trade.num_shares %></td>
-      <td><%= trade.price %></td>
-    </tr>
-  <% end %>
-</table>
-
-
-<h2> Portfolio </h2>
+<!-- Portfolio - start -->
 <% flag = signed_in? && current_user.id == @user.id %>
-<table>
-  <th>Company</th>
-  <th>Number of Shares</th>
-  <th>Current price</th>
+<table class="table table-striped table-bordered table-condensed">
+  <th>Name</th>
+  <th>Symbol</th>
+  <th>Price</th>
+  <th>Change</th>
+  <th>Position</th>
   <% if flag %> 
     <th>Notification</th>
   <% end %>
   <% @user.portfolio.keys.each do |company_id| %>
     <tr>
-      <td><%= Company.find(company_id).symbol %></td>
+
+      <% company = Company.find(company_id) %>
+      <% quote = company.quotes.last %>
+
+      <td><%= company.name %></td>
+
+      <td><%= company.symbol %></td>
+
+      <td><%= quote.price %></td>
+      
+      <td>
+      <font color="<%= (quote.change < 0) ? "red" : "green" %>">
+        <%= "+" if (quote.change > 0) %><%= quote.change %> (<%= quote.percent_change %>&#37;)
+      </font>
+      </td>
+
       <td><%= @user.portfolio[company_id] %></td>
-      <td><%= Company.find(company_id).quotes.last.price %></td>
+
       <td>
         <% if flag %> 
           <form action="<%= user_notifications_url(@user) %>" method="post">
@@ -135,15 +104,62 @@
           </form>
         <% end %>
       </td>
+
+    </tr>
+  <% end %>
+</table>
+<!-- Portfolio - end -->
+
+<br>
+
+<!-- Transactions - start -->
+<h2>Transactions</h2><br><br>
+
+<table class="table table-striped table-bordered table-condensed">
+  <th>Company</th>
+  <th>Number of Shares</th>
+  <th>Price</th>
+  <% @user.trades.each do |trade| %>
+    <tr>
+      <td><%= Company.find(trade.company_id).symbol %></td>
+      <td><%= trade.num_shares %></td>
+      <td><%= trade.price %></td>
     </tr>
   <% end %>
 </table>
 
-<h2> Profit graph </h2>
+<% if signed_in? && current_user.id == @user.id %>
+<form action="<%= user_trades_url(@user) %>" method="post">
+  <input
+     name="authenticity_token"
+     type="hidden"
+     value="<%= form_authenticity_token %>">
 
+  <label for="trade_symbol">symbol:</label>
+  <input
+     id="trade_symbol"
+     name="trade[symbol]"
+     type="text">
+  &nbsp;&nbsp;&nbsp;
+  <label for="trade_num_shares">&#35; of shares:</label>
+  <input
+     id="trade_num_shares"
+     name="trade[num_shares]"
+     type="text">
+  &nbsp;&nbsp;&nbsp;
+  <input type="submit" value="Trade">
+</form>
+<% end %>
+
+<!-- Transactions - end -->
+
+<br><br><br>
+
+<!-- Performance graph - start -->
+<h2> Performance </h2>
 <% data = @user.profit_graph_data_hash %>
 <%= line_chart(data, min: data.values.min, max: data.values.max, height: "400px") %>
-
+<!-- Performance graph - end -->
 
 
 
