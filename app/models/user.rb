@@ -115,7 +115,7 @@ class User < ActiveRecord::Base
       result -= trade.num_shares * trade.price
     end
 
-    result
+    truncate_round(result)
   end
 
   def profit_date(time)
@@ -208,6 +208,10 @@ class User < ActiveRecord::Base
 
   def truncate(x)
     (x * 100).floor / 100.0
+  end
+
+    def truncate_round(x)
+    (x * 100).round / 100.0
   end
 
   def get_temp_trades_date(time)
