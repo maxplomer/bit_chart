@@ -76,11 +76,9 @@
 
     <!-- Recent quotes - start -->
     <% if signed_in? %>
-      <h2>Recent quotes</h2>
+      Recent Quotes<br><br>
 
-      <table>
-        <th>Symbol</th>
-        <th>Price</th>
+      <table class="table table-condensed">
         <% counter = 0 %>
         <% current_user.recent_quotes.reverse.each do |quote| %>
           <tr>
@@ -99,11 +97,17 @@
                   type="hidden"
                   value="<%= company.symbol %>">
 
-                <input type="submit" value="<%= company.symbol %>">
+                <input type="submit" value="<%= company.symbol %>" class="btn-link">
               </form>
 
             </td>
-            <td>&#36;<%= company.quotes.last.price %></td>
+            <% quote = company.quotes.last %>
+            <td><%= quote.price %></td>
+            <td>
+              <font color="<%= (quote.change < 0) ? "red" : "green" %>">
+              <%= "+" if quote.change > 0 %><%= quote.change %>
+            </font>
+            </td>
           </tr>
           <% counter += 1 %>
           <% break if counter == 10 %>
