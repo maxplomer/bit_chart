@@ -1,33 +1,22 @@
-<h1><%= @company.name %></h1>
-
-<h1><%= @company.symbol %></h1>
-
-<% quote = @company.quotes.last %>
-<% flag = (quote.change > 0 ? "+" : "-") %>
-<% flag = "" if quote.change == 0 %>
-
-<table>
-
-  <tr>
-   <td>Price</td>
-   <td>&nbsp; &#36; <%= quote.price %></td>
-  <tr>
-
-  <tr>
-   <td>Change</td>
-   <td>&nbsp; <%= flag %> &#36;<%= quote.change.abs %></td>
-  <tr>
-
-  <tr>
-   <td>&#37; Change</td>
-   <td>&nbsp; <%= flag %> <%= quote.percent_change.abs %>&#37;</td>
-  <tr>
-
-</table>
+<font color="grey" size="6"><%= @company.name %></font>
 
 <br>
 
-<h3>Chart</h3>
+<font color="grey" size="4"><%= @company.symbol %></font>
+
+<br>
+
+<% quote = @company.quotes.last %>
+
+<h2><%= quote.price %></h2>&nbsp;&nbsp;&nbsp;
+
+<font color="<%= (quote.change > 0) ? "green" : "red" %>" size="4">
+  <%= "▲" if quote.change > 0 %>
+  <%= "▼" if quote.change < 0 %>
+  <%= quote.change.abs %>
+  (<%= quote.percent_change.abs %>&#37;)
+</font>
+
 
 <% data = @company.price_graph_data_hash %>
 <% diff = (data.values.max - data.values.min) / 10.0 %>

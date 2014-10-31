@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
  */
+
+
+h2 {
+  display:inline;
+}
