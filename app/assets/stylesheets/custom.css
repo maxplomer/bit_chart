@@ -39,24 +39,26 @@ body {
 /* HEADER */
 
 header {
-  background: grey;
-  border-bottom: 3px solid grey;
+  background: rgb(241,241,241);
+  height: 60px;
 }
 
 header a {
-  color: white;
+  color: black;
 }
+
+header .title {
+  color: blue;
+}
+
 header > nav {
   width: 700px;
   margin: auto;
-  border-left: 3px solid grey;
-  border-right: 3px solid grey;
+
 }
 
 .logo {
-  float: left;
-  padding: 10px;
-  font-weight: bold;
+  line-height: 2em;
 }
 
 header ul {
@@ -64,7 +66,6 @@ header ul {
 }
 header > nav > ul > li {
   float: left;
-  border-left: 3px solid grey;
 }
 header li a {
   padding: 10px;
