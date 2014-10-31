@@ -21,9 +21,22 @@ class Company < ActiveRecord::Base
   def price_graph_data_hash
     data = {} 
 
-    self.quotes.each do |quote| 
-      data[quote.created_at.time] = quote.price if quote.created_at.time.today?
-    end 
+    #only want graph to erase at 9:30am when new quote is pulled
+    new_quote_today = self.quotes.last.created_at.time.today?
+
+    if new_quote_today
+
+      self.quotes.each do |quote| 
+        data[quote.created_at.time] = quote.price if quote.created_at.time.today?
+      end
+      
+    else
+
+      self.quotes.each do |quote| 
+        data[quote.created_at.time] = quote.price if (quote.created_at.time + 1.day).today?
+      end 
+
+    end
     
     return data
   end
