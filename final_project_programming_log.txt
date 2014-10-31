@@ -493,3 +493,9 @@ config.assets.precompile += %w( custom.css)
 to
 
 production.rb
+
+
+
+////////////////////
+
+notifications and edit account menus are dropdown that only drop on click, but could be just scroll over doesn't matter

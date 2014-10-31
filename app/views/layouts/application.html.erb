@@ -13,6 +13,29 @@
     <%= csrf_meta_tags %>
     
   </head>
+
+<header>
+  <nav class="group">
+    <a href="#" class="logo">App Academy Students</a>
+
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li class="dropdown">
+        <a href="#">Notifications</a>
+
+        <ul class="menu">
+          <li>Someone liked your picture.</li>
+          <li>You have a new friend request.</li>
+          <li>Welcome to App Academy.</li>
+        </ul>
+
+      </li>
+      <li><a href="#">Messages</a></li>
+      <li><a href="#">Settings</a></li>
+    </ul>
+  </nav>
+</header>
+
   <body>
     <!-- Errors - start -->
     <% if flash[:errors] %>
@@ -25,6 +48,7 @@
     <br>
     <% end %>
     <!-- Errors - end -->
+
 
 <ul class="list-inline">
   <li>

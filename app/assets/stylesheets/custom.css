@@ -3,7 +3,104 @@
   padding-left: 1cm;
 }
 
-
 .col-mainbar {
   width: 700px;
+}
+
+/* RESET ul */
+ul {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  text-decoration: inherit;
+}
+
+/* remove bullet */
+ul {
+  list-style: none;
+}
+
+/* default font that will inherit */
+body {
+  font-family: sans-serif;
+}
+
+/* UTILS */
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* HEADER */
+
+header {
+  background: grey;
+  border-bottom: 3px solid grey;
+}
+
+header a {
+  color: white;
+}
+header > nav {
+  width: 700px;
+  margin: auto;
+  border-left: 3px solid grey;
+  border-right: 3px solid grey;
+}
+
+.logo {
+  float: left;
+  padding: 10px;
+  font-weight: bold;
+}
+
+header ul {
+  float: right;
+}
+header > nav > ul > li {
+  float: left;
+  border-left: 3px solid grey;
+}
+header li a {
+  padding: 10px;
+  display: block;
+}
+
+/* DROPDOWN */
+
+.dropdown {
+  position: relative;
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  background: white;
+  left: -3px;
+  border-top: solid grey;
+}
+
+.menu li {
+  width: 200px;
+  padding: 5px;
+  border-left: solid grey;
+  border-bottom: solid grey;
+  border-right: solid grey;
+}
+
+.dropdown:hover {
+  background: grey;
+}
+
+.dropdown:hover .menu {
+  display: block;
+}
+
+.menu li:hover {
+  background: grey;
 }
