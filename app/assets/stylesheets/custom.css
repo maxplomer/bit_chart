@@ -83,20 +83,42 @@ header li a {
   position: relative;
   line-height: 2.9em;
   margin-right: 25px;
+  z-index: 1000;
 }
 
 .menu {
   display: none;
   position: absolute;
   background: rgb(229,229,229);
-  left: -60px;
+  left: -80px;
 }
 
 .menu li {
-  width: 200px;
+  width: 220px;
   padding: 5px;
+  text-align: center;
 }
 
 .dropdown:hover .menu {
+  display: block;
+}
+
+
+.menu-account {
+  display: none;
+  position: absolute;
+  background: white;
+  left: -120px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.menu-account li {
+  width: 300px;
+  padding: 5px;
+  text-align: center;
+}
+
+.dropdown:hover .menu-account {
   display: block;
 }

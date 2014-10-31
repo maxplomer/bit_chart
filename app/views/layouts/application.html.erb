@@ -46,15 +46,33 @@
           <% end %>
         </ul>
         <% end %>
-        
+
       </li>
       <li class="dropdown">
         <a>Account</a>
 
-        <ul class="menu">
-          <li>Someone liked your picture.</li>
-          <li>You have a new friend request.</li>
-          <li>Welcome to App Academy.</li>
+        <ul class="menu-account">
+          <li>
+          <% if signed_in? %>
+    Signed in as: <%= current_user.email %>
+          <% end %>
+          </li>
+          
+          <li>
+<!-- Edit Account - start -->
+    <% if signed_in? %>
+    <ul class="list-inline">
+      <li><%= link_to "Edit Account", edit_user_url(current_user), class: "btn btn-default" %></li>
+      <li><%= button_to "Sign Out", session_url, :method => :delete, class: "btn btn-default" %></li>
+    </ul>
+    <% else %>
+    <p>
+      <%= link_to "Sign In", new_session_url, class: "btn btn-default" %> 
+      <%= link_to "Sign up", new_user_url, class: "btn btn-default" %>
+    </p>
+    <% end %>
+    <!-- Edit Account - end -->
+          </li>
         </ul>
 
       </li>
@@ -74,70 +92,17 @@
       <% end %>
     </ul>
     <br>
+    <hr>
     <% end %>
     <!-- Errors - end -->
 
 
-<ul class="list-inline">
-  <li>
-    <h1>Finance Clone</h1>
-  </li>
-
-  <li>
-    <!-- Get a quote - start -->
-    <% action = (signed_in? ? user_recent_quotes_url(current_user) : recent_quotes_url) %>    
-    <form action="<%= action  %>" method="post">
-      <input
-        name="authenticity_token"
-        type="hidden"
-        value="<%= form_authenticity_token %>">
-
-      <input
-        id="recent_quote_symbol"
-        name="recent_quote[symbol]"
-        type="text"
-        placeholder="enter stock ticker">
-
-      <input type="submit" value="Search" class="btn btn-default">
-    </form>
-    <!-- Get a quote - end -->
-  </li>
-
-  <li>
-    <!-- Alerts - start -->
-    <% if signed_in? %>
-      <%= link_to "Alerts", user_notification_messages_url(current_user) %>
-    <% else %>
-      <%= link_to "Alerts", new_session_url %>
-    <% end %>
-    <!-- Alerts - end -->
-  </li>
-
-  <li>
-    <!-- Edit Account - start -->
-    <% if signed_in? %>
-    Signed in as: <%= current_user.email %><br><br>
-    <ul class="list-inline">
-      <li><%= link_to "Edit Account", edit_user_url(current_user), class: "btn btn-default" %></li>
-      <li><%= button_to "Sign Out", session_url, :method => :delete, class: "btn btn-default" %></li>
-    </ul>
-    <% else %>
-    <p>
-      <%= link_to "Sign In", new_session_url, class: "btn btn-default" %> 
-      <%= link_to "Sign up", new_user_url, class: "btn btn-default" %>
-    </p>
-    <% end %>
-    <!-- Edit Account - end -->
-  </li>
-</ul>
-
-<hr>
 
 <div class="row">
 
   <div class="col-xs-3 col-sidebar">
     <!-- Home menu - start -->
-
+    <br>
     <a href="/static_pages/home" class="">Home</a> <br>
     <% if signed_in? %>
     <a href="<%= user_url(current_user) %>">My Portfolio</a> <br>
@@ -194,6 +159,7 @@
   </div>
 
   <div class="col-xs-9 col-mainbar">
+    <br>
     <%= yield %>
   </div>
 
