@@ -1,4 +1,50 @@
-<h1>Edit User</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Finance Clone</title>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
+    <%= stylesheet_link_tag 'http://yandex.st/bootstrap/3.1.1/css/bootstrap.min.css' %>
+    <%= javascript_include_tag 'http://yandex.st/bootstrap/3.1.1/js/bootstrap.min.js' %>
+    
+    <%= csrf_meta_tags %>
+    
+</head>
+<body>
 
 
-<%= render "form", :user => @user %>
+<form action="<%= user_url(@user) %>" method="post">
+  <input
+     name="_method"
+     type="hidden"
+     value="put">
+  <input
+     name="authenticity_token"
+     type="hidden"
+     value="<%= form_authenticity_token %>">
+
+  <label for="user_name">Name</label>
+  <br>
+  <input
+     id="user_name"
+     name="user[name]"
+     type="text"
+     value="<%= @user.name %>">
+  <br><br>
+
+  <label for="user_email">Email</label>
+  <br>
+  <input
+     id="user_email"
+     name="user[email]"
+     type="text"
+     value="<%= @user.email %>">
+  <br><br>
+
+  <input type="submit" value="Save">
+</form>
+
+</body>
+</html>

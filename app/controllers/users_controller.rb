@@ -31,6 +31,7 @@ class UsersController < ApplicationController
     unless params.include?(:id) && current_user.id == params[:id].to_i     
       redirect_to user_url(current_user)
     end
+    render :edit, :layout => false
   end
   
   def update
