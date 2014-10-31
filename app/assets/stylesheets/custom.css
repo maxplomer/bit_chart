@@ -81,7 +81,7 @@ header li a {
 
 .dropdown {
   position: relative;
-  line-height: 2.5em;
+  line-height: 2.9em;
   margin-right: 25px;
 }
 
@@ -90,25 +90,13 @@ header li a {
   position: absolute;
   background: rgb(229,229,229);
   left: -60px;
-  border-top: solid grey;
 }
 
 .menu li {
   width: 200px;
   padding: 5px;
-  border-left: solid grey;
-  border-bottom: solid grey;
-  border-right: solid grey;
-}
-
-.dropdown:hover {
-  background: grey;
 }
 
 .dropdown:hover .menu {
   display: block;
-}
-
-.menu li:hover {
-  background: grey;
 }
