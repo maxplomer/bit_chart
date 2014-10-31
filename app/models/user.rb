@@ -61,7 +61,12 @@ class User < ActiveRecord::Base
 
     time = self.trades.first.created_at.time
     data[time] = 0
-    now = Time.new
+
+    #change time to 9:30 am est
+    time = time.change(:hour => 13, :min => 30, :sec => 0)
+
+    now = Time.new.getutc
+
     while true
       time += 1.day
 
@@ -69,6 +74,8 @@ class User < ActiveRecord::Base
 
       data[time] = self.profit_date(time)
     end
+
+    data[now] = self.profit
 
     return data
   end
