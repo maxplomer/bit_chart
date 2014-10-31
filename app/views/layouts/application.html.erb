@@ -40,6 +40,9 @@
 
         <% if signed_in? %>
         <% @notification_messages = current_user.notification_messages %>
+        <% if @notification_messages.length > 5 %>
+          <% @notification_messages = @notification_messages[-5..-1] %>
+        <% end %>
         <ul class="menu">
           <% @notification_messages.reverse.each do |msg| %>
             <li><%= msg.message %></li>
