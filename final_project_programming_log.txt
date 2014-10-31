@@ -476,4 +476,9 @@ portfolio graph
 
 basic links
 
+
+
+///////////////////
+
+git push -f ( force push )
  
