@@ -17,7 +17,23 @@
 <header>
   <nav class="group">
     <h2 class="logo">Finance Clone</h2>
+    <!-- Get a quote - start -->
+    <% action = (signed_in? ? user_recent_quotes_url(current_user) : recent_quotes_url) %>    
+    <form action="<%= action  %>" method="post" class="get-quote">
+      <input
+        name="authenticity_token"
+        type="hidden"
+        value="<%= form_authenticity_token %>">
 
+      <input
+        id="recent_quote_symbol"
+        name="recent_quote[symbol]"
+        type="text"
+        placeholder="enter stock ticker">
+
+      <input type="submit" value="Search" class="btn btn-default">
+    </form>
+    <!-- Get a quote - end -->
     <ul>
       <li class="dropdown">
         <a>Alerts</a>

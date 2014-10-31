@@ -38,6 +38,10 @@ body {
 
 /* HEADER */
 
+.get-quote {
+  padding-left: 100px;
+}
+
 header {
   background: rgb(241,241,241);
   height: 60px;
@@ -52,11 +56,10 @@ header .title {
 }
 
 header > nav {
-  width: 800px;
+  width: 900px;
   margin: auto;
   float: left;
   padding-left: 20px;
-
 }
 
 .logo {
@@ -79,6 +82,7 @@ header li a {
 .dropdown {
   position: relative;
   line-height: 2.5em;
+  margin-right: 25px;
 }
 
 .menu {
