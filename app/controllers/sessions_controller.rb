@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   before_action :require_signed_in!, :only => [:destroy]
 
   def new
+    render :new, :layout => false
   end
 
   def create
