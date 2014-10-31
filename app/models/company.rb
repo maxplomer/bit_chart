@@ -22,9 +22,9 @@ class Company < ActiveRecord::Base
     data = {} 
 
     self.quotes.each do |quote| 
-      data[quote.created_at.time] = quote.price 
+      data[quote.created_at.time] = quote.price if quote.created_at.time.today?
     end 
-
+    
     return data
   end
 
