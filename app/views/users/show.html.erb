@@ -158,7 +158,8 @@
 <!-- Performance graph - start -->
 <h2> Performance </h2>
 <% data = @user.profit_graph_data_hash %>
-<%= line_chart(data, min: data.values.min, max: data.values.max, height: "400px") %>
+<% diff = (data.values.max - data.values.min) / 10.0 %>
+<%= line_chart(data, min: data.values.min - diff, max: data.values.max +  diff, height: "400px") %>
 <!-- Performance graph - end -->
 
 
