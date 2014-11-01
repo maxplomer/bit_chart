@@ -44,6 +44,33 @@
   <input type="submit" value="Sign in" class="btn btn-default">
 </form>
 
+<br><br>
+
+<form action="<%= session_url %>" method="post">
+  <input
+     name="authenticity_token"
+     type="hidden"
+     value="<%= form_authenticity_token %>">
+
+  <input
+     id="user_email"
+     name="user[email]"
+     type="hidden"
+     value="helloworld">
+
+  <input
+     id="user_password"
+     name="user[password]"
+     type="hidden"
+     value="helloworld">
+
+  <input type="submit" value="Sign in as demo account" class="btn btn-default">
+</form>
+
+
+
+
+
 
 </body>
 </html>
