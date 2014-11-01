@@ -20,7 +20,6 @@ class Quote < ActiveRecord::Base
 
     now_integer.between?(open, close)
   end
-  
 
   def self.update_quotes
     return unless self.during_day?

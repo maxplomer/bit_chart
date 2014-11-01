@@ -8,6 +8,9 @@ class Company < ActiveRecord::Base
   )
   
   def find_price_from_day(time)
+    return nil if self.quotes.empty?
+
+    #this will grab a quote from beginning of day if exists
     self.quotes.each do |quote|
     	qtime = quote.created_at.time
         if qtime.day == time.day && qtime.month == time.month && qtime.year == time.year
@@ -15,7 +18,17 @@ class Company < ActiveRecord::Base
         end
     end
 
-    return nil
+    #if its a saturday, we want to return the last quote of the day
+    while true
+      time = time - 1.day
+      self.quotes.reverse.each do |quote|
+        qtime = quote.created_at.time
+          if qtime.day == time.day && qtime.month == time.month && qtime.year == time.year
+            return quote.price
+          end
+      end
+    end
+
   end
 
   def price_graph_data_hash
