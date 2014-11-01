@@ -22,20 +22,12 @@ class Company < ActiveRecord::Base
     data = {} 
 
     #only want graph to erase at 9:30am when new quote is pulled
-    new_quote_today = self.quotes.last.created_at.time.today?
+    day_last_quote = self.quotes.last.created_at.time.day
 
-    if new_quote_today
+    self.quotes.reverse.each do |quote|
+      break if quote.created_at.time.day != day_last_quote
 
-      self.quotes.each do |quote| 
-        data[quote.created_at.time] = quote.price if quote.created_at.time.today?
-      end
-      
-    else
-
-      self.quotes.each do |quote| 
-        data[quote.created_at.time] = quote.price if (quote.created_at.time + 1.day).today?
-      end 
-
+      data[quote.created_at.time] = quote.price
     end
     
     return data
