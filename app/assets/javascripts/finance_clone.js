@@ -4,10 +4,12 @@ window.FinanceClone = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert('Hello from Backbone!');
+    alert("hello from backbone");
+    new FinanceClone.Routers.Companies({
+      $rootEl: $("#content")
+    });
+    Backbone.history.start();
   }
 };
 
-$(document).ready(function(){
-  //FinanceClone.initialize();
-});
+

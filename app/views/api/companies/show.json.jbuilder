@@ -1,0 +1,1 @@
+json.partial!("company", :company => @company, :quotes => @quotes, :price_graph_data_hash => @price_graph_data_hash)

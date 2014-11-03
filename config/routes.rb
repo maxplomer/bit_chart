@@ -1,10 +1,11 @@
 FinanceClone::Application.routes.draw do
   get "static_pages/home"
+  get "static_pages/backbone"
   resources :users, :only => [:create, :new, :show, :edit, :update, :index] do 
     resources :trades, :only => [:create]
     resources :recent_quotes, :only => [:create]
     resources :notifications, :only => [:create, :destroy]
-    resources :notification_messages, :only => [:index]
+    #resources :notification_messages, :only => [:index] #not using anymore
     resources :follows, :only => [:create, :destroy, :index]
   end
   resource :session, :only => [:create, :destroy, :new]
@@ -14,6 +15,10 @@ FinanceClone::Application.routes.draw do
   resources :recent_quotes, :only => [:create]
 
   root :to => "sessions#new"
+
+  namespace :api, :defaults => { :format => :json } do
+    resources :companies, :only => [:show, :index]
+  end
 end
 
 
