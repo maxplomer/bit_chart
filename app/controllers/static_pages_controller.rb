@@ -3,5 +3,6 @@ class StaticPagesController < ApplicationController
   end
 
   def backbone
+    render :backbone, :layout => false
   end
 end
