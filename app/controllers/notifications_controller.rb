@@ -1,7 +1,5 @@
 class NotificationsController < ApplicationController
 
-#user_id: nil, company_id: nil, percent_swing: nil
-
   def create
     user_id = params[:user_id].to_i
     company_id = params[:notification][:company_id].to_i
