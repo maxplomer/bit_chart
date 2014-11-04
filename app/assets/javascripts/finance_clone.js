@@ -23,7 +23,7 @@ function truncate(x) {
 }
 
 
-
+// for company show page
 function getData() {
   var url = "http://query.yahooapis.com/v1/public/yql";
   var symbol = $("#symbol").val();
@@ -38,15 +38,16 @@ function getData() {
       var change = data.query.results.quote.Change;
       if (change >= 0) { 
         var string = "▲";
+        $("#change").attr("color","green");
       } else {   
         var string = "▼";
+        $("#change").attr("color","red");
       }
 
       string += " " + Math.abs(change) + " ";
       string += "(" + Math.abs(percent_change(price, change)) + "%)"
       
       $("#change").text(string);/// do the uparrow change color thing here
-
     })
     .fail(function (jqxhr, textStatus, error) {
       var err = textStatus + ", " + error;
