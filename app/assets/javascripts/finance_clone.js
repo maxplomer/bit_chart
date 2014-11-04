@@ -33,8 +33,9 @@ function getData() {
     .done(function (data) {
 
       $("#price").text(data.query.results.quote.LastTradePriceOnly);
-
-      $("#change").text(data.query.results.quote.Change);
+      
+      var change = data.query.results.quote.Change;
+      $("#change").text(change);/// do the uparrow change color thing here
 
     })
     .fail(function (jqxhr, textStatus, error) {
