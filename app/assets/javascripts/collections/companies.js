@@ -3,10 +3,11 @@ FinanceClone.Collections.Companies = Backbone.Collection.extend({
   url: '/api/companies',
 
   getOrFetch: function (id) {
+    alert(id);
     var company = this.get(id),
       company = this;
     if(!company) {
-      company = new PostApp.Models.Company({ id: id });
+      company = new FinanceClone.Models.Company({ id: id });
       company.fetch({
         success: function () {
           companies.add(company);

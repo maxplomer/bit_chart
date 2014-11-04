@@ -11,5 +11,3 @@ window.FinanceClone = {
     Backbone.history.start();
   }
 };
-
-
