@@ -4,13 +4,24 @@ window.FinanceClone = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert("hello from backbone");
+    //alert("hello from backbone");
     new FinanceClone.Routers.Companies({
       $rootEl: $("#content")
     });
     Backbone.history.start();
   }
 };
+
+
+
+function percent_change(price_now, change) {
+  price_prev = price_now - change;
+  return truncate( ((price_now / price_prev) - 1) * 100 );
+}
+function truncate(x) {
+  return Math.floor(x * 100) / 100.0;
+}
+
 
 
 function getData() {
@@ -20,10 +31,11 @@ function getData() {
 
   $.getJSON(url, 'q=' + data + "&format=json&diagnostics=true&env=http://datatables.org/alltables.env")
     .done(function (data) {
-      $("#result").text("Bid Price: " 
-        + data.query.results.quote.LastTradePriceOnly 
-        + ", Change: " 
-        + data.query.results.quote.Change);
+
+      $("#price").text(data.query.results.quote.LastTradePriceOnly);
+
+      $("#change").text(data.query.results.quote.Change);
+
     })
     .fail(function (jqxhr, textStatus, error) {
       var err = textStatus + ", " + error;

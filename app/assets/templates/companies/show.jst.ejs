@@ -1,16 +1,27 @@
-Company Show View
-<h1><%= company.escape("name") %></h1>
-<pre><%= company.escape("symbol") %></pre>
+
+
+<font color="grey" size="6"><%= company.escape("name") %></font>
+
+<br>
+
+<font color="grey" size="4"><%= company.escape("symbol") %></font>
+
+<br>
+
+<input type="hidden" id="symbol" value="<%= company.escape("symbol") %>">
+
+<b><font size="6" id='price'></font></b>&nbsp;&nbsp;&nbsp;
+
+<font size="4" id='change'></font>
+
+<div id='result'></div> 
+
+<br><br><br><br>
+
 <%= company.escape("price_graph_data_x_axis") %>
 <%= company.escape("price_graph_data_y_axis") %>
 
-<br>
-
-<font color="grey" size="6">Tesla Motors</font>
-
-<br>
-
-<font color="grey" size="4">TSLA</font>
+<br><br>
 
 <input type="hidden" id="symbol" value="TSLA">
 <div id='result'></div>
