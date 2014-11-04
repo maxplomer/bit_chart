@@ -31,11 +31,21 @@ function getData() {
 
   $.getJSON(url, 'q=' + data + "&format=json&diagnostics=true&env=http://datatables.org/alltables.env")
     .done(function (data) {
-
-      $("#price").text(data.query.results.quote.LastTradePriceOnly);
+      
+      var price = data.query.results.quote.LastTradePriceOnly
+      $("#price").text(price);
       
       var change = data.query.results.quote.Change;
-      $("#change").text(change);/// do the uparrow change color thing here
+      if (change >= 0) { 
+        var string = "▲";
+      } else {   
+        var string = "▼";
+      }
+
+      string += " " + Math.abs(change) + " ";
+      string += "(" + Math.abs(percent_change(price, change)) + "%)"
+      
+      $("#change").text(string);/// do the uparrow change color thing here
 
     })
     .fail(function (jqxhr, textStatus, error) {
