@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
     data[time] = 0
 
     #change time to 9:30 am est
-    time = time.change(:hour => 13, :min => 30, :sec => 0)
+    time = time.change(:hour => 14, :min => 30, :sec => 0)
 
     now = Time.new.getutc
 

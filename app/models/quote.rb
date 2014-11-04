@@ -15,8 +15,8 @@ class Quote < ActiveRecord::Base
 
     #convert time to integer
     now_integer = now.hour * 60 + now.min
-    open = 13 * 60 + 30                    # 1:30 pm utc (930am est)
-    close = 20 * 60                       # 8pm utc  (4pm est)
+    open = 14 * 60 + 30                    # 2:30 pm utc (930am est)
+    close = 21 * 60                       # 9pm utc  (4pm est)
 
     now_integer.between?(open, close)
   end
