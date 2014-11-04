@@ -16,15 +16,6 @@
 
 <div id='result'></div> 
 
-<br><br><br><br>
-
-<%= company.escape("price_graph_data_x_axis") %>
-
-<br><br>
-<%= company.escape("price_graph_data_y_axis") %>
-
-<br><br>
-
 <input type="hidden" id="symbol" value="TSLA">
 <div id='result'></div>
 <script language="JavaScript">
@@ -49,7 +40,7 @@ $(function () {
             enabled: false
         },
         xAxis: {
-            categories: []
+          type: 'datetime'
         },
         yAxis: {
             title: {
@@ -67,7 +58,10 @@ $(function () {
 
         series: [{
             name: 'Price',
+            pointInterval: 600 * 1000,
+            pointStart: Date.UTC(2014, 10, 4, 9,30),
             data: [<%= company.escape("price_graph_data_y_axis") %>]
+
         }]
     });
 });
