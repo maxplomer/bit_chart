@@ -21,11 +21,11 @@ class Api::TradesController < ApplicationController
 
 
     if company.nil?
-      flash[:errors] = ["We don't trade that ticker"]
+      #flash[:errors] = ["We don't trade that ticker"]
     elsif !Quote.during_day?
-      flash[:errors] = ["We don't trade after hours"]
+      #flash[:errors] = ["We don't trade after hours"]
     elsif price.nil?
-      flash[:errors] = ["The price is nil"]
+      #flash[:errors] = ["The price is nil"]
     else
       num_shares = params["num_shares"]
 
@@ -36,7 +36,11 @@ class Api::TradesController < ApplicationController
         price: price
       )
  
-      @trade.save
+      if @trade.save
+        render json: @trade
+      else
+        render :json => @trade.errors, :status => :unprocessable_entity
+      end
     end
   end
   

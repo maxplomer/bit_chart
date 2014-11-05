@@ -28,8 +28,8 @@ FinanceClone.Views.UserShow = Backbone.View.extend({
 
     newTrade.save({}, {
       success: function () {
-        FinanceClone.Collections.todos.add(newTrade);
-        Backbone.history.navigate("/", { trigger: true });
+        FinanceClone.Collections.trades.add(newTrade);
+        //Backbone.history.navigate("/", { trigger: true });
       }
     });
   }
