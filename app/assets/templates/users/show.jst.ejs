@@ -50,11 +50,19 @@
 <% positions = [user.escape("portfolio_values")] %>
 
 <table>
-  <th>company_id</th>
+  <th>Name</th>
+  <th>Symbol</th>
+  <th>Price</th>
+  <th>Change</th>
   <th>Position</th>
   <% for (var i=0; i<=company_ids.length; i++) { %>
    <tr>
-    <td><%= company_ids[i] %></td>
+    <% var company = companies.getOrFetch(company_ids[i]) %>
+
+    <td><%= company.escape("name") %></td>
+    <td><%= company.escape("symbol") %></td>
+    <td><%= company.escape("price") %></td>
+    <td><%= company.escape("change") %></td>
     <td><%= positions[i] %></td>
    </tr>
   <% } %>

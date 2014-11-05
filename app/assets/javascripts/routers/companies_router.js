@@ -20,7 +20,8 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
   userShow: function (id) {
     var user = FinanceClone.Collections.users.getOrFetch(id);
     var showView = new FinanceClone.Views.UserShow({
-      model: user
+      model: user,
+      collection: FinanceClone.Collections.companies
     });
     
     this._swapView(showView);
