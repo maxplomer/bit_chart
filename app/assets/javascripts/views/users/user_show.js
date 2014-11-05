@@ -72,7 +72,12 @@ FinanceClone.Views.UserShow = Backbone.View.extend({
     event.preventDefault();
     that = this;
     var params = $(event.currentTarget).serializeJSON();
-    var follow = FinanceClone.Models.follows.where(params["follow"]);
+    var follower_id = Number(params["follow"]["follower_id"]);
+    var leader_id = Number(params["follow"]["leader_id"]);
+
+    var attrs = {follower_id: follower_id, leader_id: leader_id};
+
+    var follow = FinanceClone.Collections.follows.where(attrs);
     follow = follow[0];
 
     follow.destroy({}, {
