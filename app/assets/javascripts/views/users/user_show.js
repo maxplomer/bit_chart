@@ -4,7 +4,9 @@ FinanceClone.Views.UserShow = Backbone.View.extend({
 
   events: {
     "submit .form-trade": "submit",
-    "submit .form-notification": "submit_notification"
+    "submit .form-notification": "submit_notification",
+    "submit .form-follow": "submit_follow",
+    "submit .form-unfollow": "submit_unfollow"
   },
 
   initialize: function () {
@@ -51,5 +53,34 @@ FinanceClone.Views.UserShow = Backbone.View.extend({
     });
   },
 
+  submit_follow: function (event) {
+    event.preventDefault();
+    that = this;
+    var params = $(event.currentTarget).serializeJSON();
+    var newFollow = new FinanceClone.Models.Follow(params["follow"]);
+
+    newFollow.save({}, {
+      success: function () {
+        FinanceClone.Collections.follows.add(newFollow);
+        that.model.fetch();
+        //Backbone.history.navigate("/", { trigger: true });
+      }
+    });
+  },
+
+  submit_unfollow: function (event) {
+    event.preventDefault();
+    that = this;
+    var params = $(event.currentTarget).serializeJSON();
+    var newFollow = new FinanceClone.Models.Follow(params["follow"]);
+
+    newFollow.save({}, {
+      success: function () {
+        FinanceClone.Collections.follows.add(newFollow);
+        that.model.fetch();
+        //Backbone.history.navigate("/", { trigger: true });
+      }
+    });
+  },
 
 });

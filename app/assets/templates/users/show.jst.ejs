@@ -19,24 +19,37 @@
 <% if ( user.escape("id") != window.currentUser.id ) {   %>
 
   <% if (follower_ids.indexOf(currentuser_id) > -1 ) { %>
-    <% var message = "Unfollow" %>
-  <% } else { %>
-    <% var message = "Follow" %>
-  <% } %>
-  <form>
-    <input
-      id="follow_follower_id"
-      name="follow[follower_id]"
-      type="hidden"
-      value="<%= window.currentUser.id %>">
+    <form class="form-unfollow">
+      <input
+        id="follow_follower_id"
+        name="follow[follower_id]"
+        type="hidden"
+        value="<%= window.currentUser.id %>">
 
-    <input
-      id="follow_leader_id"
-      name="follow[leader_id]"
-      type="hidden"
-      value="<%= user.escape("id") %>">
-    <input type="submit" value="<%= message %>">
-  </form>
+      <input
+        id="follow_leader_id"
+        name="follow[leader_id]"
+        type="hidden"
+        value="<%= user.escape("id") %>">
+      <input type="submit" value="Unfollow">
+    </form>
+  <% } else { %>
+    <form class="form-follow">
+      <input
+        id="follow_follower_id"
+        name="follow[follower_id]"
+        type="hidden"
+        value="<%= window.currentUser.id %>">
+
+      <input
+        id="follow_leader_id"
+        name="follow[leader_id]"
+        type="hidden"
+        value="<%= user.escape("id") %>">
+      <input type="submit" value="Follow">
+    </form>
+  <% } %>
+
 
 <% } %>
 
