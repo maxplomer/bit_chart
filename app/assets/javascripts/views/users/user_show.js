@@ -72,11 +72,12 @@ FinanceClone.Views.UserShow = Backbone.View.extend({
     event.preventDefault();
     that = this;
     var params = $(event.currentTarget).serializeJSON();
-    var newFollow = new FinanceClone.Models.Follow(params["follow"]);
+    var follow = FinanceClone.Models.follows.where(params["follow"]);
+    follow = follow[0];
 
-    newFollow.save({}, {
+    follow.destroy({}, {
       success: function () {
-        FinanceClone.Collections.follows.add(newFollow);
+        FinanceClone.Collections.follows.fetch();
         that.model.fetch();
         //Backbone.history.navigate("/", { trigger: true });
       }

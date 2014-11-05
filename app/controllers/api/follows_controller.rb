@@ -22,4 +22,10 @@ class Api::FollowsController < ApplicationController
     end
   end
 
+  def destroy
+    @follow = Follow.find(params[:id])
+    @follow.destroy!
+    render json: @follow
+  end
+
 end
