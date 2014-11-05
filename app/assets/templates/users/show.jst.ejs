@@ -1,2 +1,45 @@
+
+<% if ( user.escape("id") == window.currentUser.id ) {   %>
+
+<b><font size="6">My Portfolio</font></b>
+
+<% } else { %>
+
+<b><font size="6"><%= user.escape("name") %>'s Portfolio</font></b>
+
+<% } %>
+
+&nbsp;&nbsp;&nbsp;FOLLOW-BUTTON
+
+<br><br>
+
+
+
+
+
+
+
+
+
+<br><br><br><br>
+
 <h1>User Show Page</h1>
 <%= user.escape("name") %>
+
+<br><br><br>
+
+<%= user.escape("id") %>
+
+<br><br><br>
+
+<%= window.currentUser.id %>
+
+<%= user.escape("id") == window.currentUser.id %>
+
+<% if ( user.escape("id") == window.currentUser.id ) {   %>
+
+YOU ARE THIS USER
+
+<% } %>
+
+
