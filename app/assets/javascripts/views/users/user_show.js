@@ -9,8 +9,6 @@ FinanceClone.Views.UserShow = Backbone.View.extend({
   initialize: function () {
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.collection, "sync", this.render);
-    this.listenTo(FinanceClone.Collections.trades, "sync", this.render);
-    this.listenTo(FinanceClone.Collections.users, "sync", this.render);
   },
 
   render: function () {

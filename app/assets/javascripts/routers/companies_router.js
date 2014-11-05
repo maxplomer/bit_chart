@@ -19,8 +19,6 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
 
   userShow: function (id) {
     FinanceClone.Collections.companies.fetch();
-    FinanceClone.Collections.trades.fetch();
-    FinanceClone.Collections.users.fetch();
     var user = FinanceClone.Collections.users.getOrFetch(id);
     var showView = new FinanceClone.Views.UserShow({
       model: user,
