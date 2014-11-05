@@ -52,7 +52,10 @@ group :development do
 end
 
 # real-time stock quotes
-gem "stock_quote"
+# gem "stock_quote" ##stopped working :(
+
+# new real-time stock quotes gem
+gem "market_beat"
 
 # cron scheduler
 gem 'whenever'

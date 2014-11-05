@@ -5,7 +5,7 @@ class TradesController < ApplicationController
  
     symbol = params["trade"]["symbol"].upcase
     company = Company.find_by_symbol(symbol)
-    price = StockQuote::Stock.quote(symbol).ask
+    price = MarketBeat.last_trade_real_time(company.symbol)
     
     if company.nil?
       flash[:errors] = ["We don't trade that ticker"]
