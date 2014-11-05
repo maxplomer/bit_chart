@@ -34,5 +34,14 @@ json.array!(@users) do |user|
     json.array! trades_price
   end
 
+  notification_values = [];
+  user.portfolio.keys.each do |company_id|
+    notification_values.push(user.notification_value(company_id))
+  end
+
+  json.notification_values do
+    json.array! notification_values
+  end
+
 end
 

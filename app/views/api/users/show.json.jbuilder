@@ -26,3 +26,12 @@ end
 
 json.profit_graph_data_x_axis @user.profit_graph_data_hash.keys
 json.profit_graph_data_y_axis @user.profit_graph_data_hash.values
+
+notification_values = [];
+@user.portfolio.keys.each do |company_id|
+  notification_values.push(@user.notification_value(company_id))
+end
+
+json.notification_values do
+  json.array! notification_values
+end

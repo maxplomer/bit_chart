@@ -46,8 +46,12 @@
 <br><br>
 
 <!-- Portfolio - start -->
+
+<% var flag = user.escape("id") == window.currentUser.id %>
+
 <% var company_ids = user.escape("portfolio_keys").split(',') %>
 <% var positions = user.escape("portfolio_values").split(','); %>
+<% var notification_values = user.escape("notification_values").split(','); %>
 
 <table>
   <th>Name</th>
@@ -55,6 +59,11 @@
   <th>Price</th>
   <th>Change</th>
   <th>Position</th>
+
+  <% if (flag) { %> 
+    <th>Notification</th>
+  <% } %>
+
   <% for (var i=0; i<=company_ids.length; i++) { %>
    <tr>
     <% var company = companies.get(company_ids[i]) %>
@@ -64,6 +73,27 @@
     <td><%= company.escape("price") %></td>
     <td><%= company.escape("change") %></td>
     <td><%= positions[i] %></td>
+
+    <% if (flag) { %> 
+      <td>
+        <form>
+          <input
+            id="notification-company_id"
+            name="notification[company_id]"
+            type="hidden"
+            value="<%= company_ids[i] %>">
+
+          <input
+            id="notification-percent_swing"
+            name="notification[percent_swing]"
+            type="text"
+            value="<%= notification_values[i] %>">
+
+          <input type="submit" value="Set">
+        </form>
+      </td>
+    <% } %>
+
     <% } %>
    </tr>
   <% } %>
