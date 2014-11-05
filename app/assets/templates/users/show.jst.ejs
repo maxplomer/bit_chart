@@ -43,30 +43,29 @@
 
 <!-- profit percent gain - end -->
 
+<br><br>
+
+<!-- Portfolio - start -->
+<% company_ids = [user.escape("portfolio_keys")] %>
+<% positions = [user.escape("portfolio_values")] %>
+
+<table>
+  <th>company_id</th>
+  <th>Position</th>
+  <% for (var i=0; i<=company_ids.length; i++) { %>
+   <tr>
+    <td><%= company_ids[i] %></td>
+    <td><%= positions[i] %></td>
+   </tr>
+  <% } %>
+
+
+</table>
+
+
+<!-- Portfolio - end -->
 
 
 
-
-
-<br><br><br><br>
-
-<h1>User Show Page</h1>
-<%= user.escape("name") %>
-
-<br><br><br>
-
-<%= user.escape("id") %>
-
-<br><br><br>
-
-<%= window.currentUser.id %>
-
-<%= user.escape("id") == window.currentUser.id %>
-
-<% if ( user.escape("id") == window.currentUser.id ) {   %>
-
-YOU ARE THIS USER
-
-<% } %>
 
 
