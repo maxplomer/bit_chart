@@ -79,14 +79,9 @@
 <!-- Transactions - start -->
 <h2>Transactions</h2><br>
 
-
-
-
-
 <% var trades_company_id = user.escape("trades_company_id").split(',') %>
 <% var trades_num_shares = user.escape("trades_num_shares").split(','); %>
 <% var trades_price = user.escape("trades_price").split(','); %>
-
 
 <table>
   <th>Company</th>
@@ -106,7 +101,6 @@
   <% } %>
 
 </table>
-
 
 <% if ( user.escape("id") == window.currentUser.id ) {   %>
 
@@ -134,6 +128,96 @@
 
 <% } %>
 
-
-
 <!-- Transactions - end -->
+
+<br><br>
+
+<!-- Performance graph - start -->
+<h2> Performance </h2>
+
+<% var profit_graph_data_x_axis = user.escape("profit_graph_data_x_axis").split(',') %>
+<% var x = new Date(profit_graph_data_x_axis[0]) %>
+
+<br>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+
+<script type="text/javascript">
+
+$(function () {
+    $('#container').highcharts({
+        title: {
+            text: ''
+        },
+        credits: {
+            enabled: false
+        },
+        xAxis: {
+          type: 'datetime'
+        },
+        yAxis: {
+            title: {
+                text: ''
+            }
+        },
+        legend: {
+            enabled: false
+        },
+
+        plotOptions: {
+            area: {
+                fillColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
+                marker: {
+                    radius: 0
+                },
+                lineWidth: 1,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                },
+                threshold: null
+            }
+        },
+
+        series: [{
+            type: 'area',
+            name: 'Price',
+            pointInterval: 24 * 3600 * 1000,
+            pointStart: Date.UTC(<%= x.getFullYear() %>, <%= x.getMonth() %>, <%= x.getDate() %>, 9,30),
+            data: [<%= user.escape("profit_graph_data_y_axis") %>]
+
+        }]
+    });
+});
+
+</script>
+
+
+
+<!-- Performance graph - end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

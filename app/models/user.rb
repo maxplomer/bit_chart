@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
 
       break if time > now
 
-      data[time] = self.profit_date(time)
+      data[time] = truncate(self.profit_date(time))
     end
 
     data[now] = self.profit
