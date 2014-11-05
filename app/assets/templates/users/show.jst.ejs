@@ -9,7 +9,40 @@
 
 <% } %>
 
-&nbsp;&nbsp;&nbsp;FOLLOW-BUTTON
+&nbsp;&nbsp;&nbsp;
+
+<!-- follow or unfollow - start -->
+<% var follower_ids = user.escape("follower_ids").split(',') %>
+<% currentuser_id = "" + window.currentUser.id + "" %>
+
+
+<% if ( user.escape("id") != window.currentUser.id ) {   %>
+
+  <% if (follower_ids.indexOf(currentuser_id) > -1 ) { %>
+    <% var message = "Unfollow" %>
+  <% } else { %>
+    <% var message = "Follow" %>
+  <% } %>
+  <form>
+    <input
+      id="follow_follower_id"
+      name="follow[follower_id]"
+      type="hidden"
+      value="<%= window.currentUser.id %>">
+
+    <input
+      id="follow_leader_id"
+      name="follow[leader_id]"
+      type="hidden"
+      value="<%= user.escape("id") %>">
+    <input type="submit" value="<%= message %>">
+  </form>
+
+<% } %>
+
+
+
+<!-- follow or unfollow - end -->
 
 <br><br>
 

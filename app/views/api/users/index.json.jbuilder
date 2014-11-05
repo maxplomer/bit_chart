@@ -43,5 +43,17 @@ json.array!(@users) do |user|
     json.array! notification_values
   end
 
+  follower_ids = [] 
+  User.all.each do |follower|
+    follower_ids.push(follower.id) if follower.follows?(user)
+  end
+
+  json.follower_ids do
+    json.array! follower_ids
+  end
+
+
+
+
 end
 
