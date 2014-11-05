@@ -46,8 +46,8 @@
 <br><br>
 
 <!-- Portfolio - start -->
-<% company_ids = user.escape("portfolio_keys").split(',') %>
-<% positions = user.escape("portfolio_values").split(','); %>
+<% var company_ids = user.escape("portfolio_keys").split(',') %>
+<% var positions = user.escape("portfolio_values").split(','); %>
 
 <table>
   <th>Name</th>
@@ -74,7 +74,66 @@
 
 <!-- Portfolio - end -->
 
+<br>
+
+<!-- Transactions - start -->
+<h2>Transactions</h2><br>
 
 
 
 
+
+<% var trades_company_id = user.escape("trades_company_id").split(',') %>
+<% var trades_num_shares = user.escape("trades_num_shares").split(','); %>
+<% var trades_price = user.escape("trades_price").split(','); %>
+
+
+<table>
+  <th>Company</th>
+  <th>Number of Shares</th>
+  <th>Price</th>
+
+
+  <% for (var i=0; i<=trades_company_id.length; i++) { %>
+   <tr>
+    <% var company = companies.get(trades_company_id[i]) %>
+    <% if (company) { %>
+    <td><%= company.escape("symbol") %></td>
+    <% } %>
+    <td><%= trades_num_shares[i] %></td>
+    <td><%= trades_price[i] %></td>
+   </tr>
+  <% } %>
+
+</table>
+
+
+<% if ( user.escape("id") == window.currentUser.id ) {   %>
+
+<form>
+  <input
+    id="trade_user_id"
+    name="trade[user_id]"
+    type="hidden"
+    value="<%= window.currentUser.id %>" >
+
+  <label for="trade_symbol">symbol:</label>
+  <input
+     id="trade_symbol"
+     name="trade[symbol]"
+     type="text">
+  &nbsp;&nbsp;&nbsp;
+  <label for="trade_num_shares">&#35; of shares:</label>
+  <input
+     id="trade_num_shares"
+     name="trade[num_shares]"
+     type="text">
+  &nbsp;&nbsp;&nbsp;
+  <input type="submit" value="Trade">
+</form>
+
+<% } %>
+
+
+
+<!-- Transactions - end -->
