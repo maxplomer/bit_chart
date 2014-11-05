@@ -57,13 +57,14 @@
   <th>Position</th>
   <% for (var i=0; i<=company_ids.length; i++) { %>
    <tr>
-    <% var company = companies.getOrFetch(company_ids[i]) %>
-
+    <% var company = companies.get(company_ids[i]) %>
+    <% if (company) { %>
     <td><%= company.escape("name") %></td>
     <td><%= company.escape("symbol") %></td>
     <td><%= company.escape("price") %></td>
     <td><%= company.escape("change") %></td>
     <td><%= positions[i] %></td>
+    <% } %>
    </tr>
   <% } %>
 
