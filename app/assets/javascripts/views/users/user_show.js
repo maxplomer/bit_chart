@@ -9,6 +9,8 @@ FinanceClone.Views.UserShow = Backbone.View.extend({
   initialize: function () {
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.collection, "sync", this.render);
+    this.listenTo(FinanceClone.Collections.trades, "sync", this.render);
+    this.listenTo(FinanceClone.Collections.users, "sync", this.render);
   },
 
   render: function () {
@@ -22,13 +24,14 @@ FinanceClone.Views.UserShow = Backbone.View.extend({
 
   submit: function (event) {
     event.preventDefault();
-    
+    that = this;
     var params = $(event.currentTarget).serializeJSON();
     var newTrade = new FinanceClone.Models.Trade(params["trade"]);
 
     newTrade.save({}, {
       success: function () {
         FinanceClone.Collections.trades.add(newTrade);
+        that.model.fetch();
         //Backbone.history.navigate("/", { trigger: true });
       }
     });
