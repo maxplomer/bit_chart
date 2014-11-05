@@ -23,3 +23,6 @@ end
 json.trades_price do
   json.array! @trades_price
 end
+
+json.profit_graph_data_x_axis @user.profit_graph_data_hash.keys
+json.profit_graph_data_y_axis @user.profit_graph_data_hash.values

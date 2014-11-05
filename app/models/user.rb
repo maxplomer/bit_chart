@@ -226,7 +226,7 @@ class User < ActiveRecord::Base
     result = []
     self.trades.each do |trade| 
       trade_time = trade.created_at.time
-      break if trade_time > (time + 12.hours)
+      break if trade_time > (time)
       result.push(trade) 
     end
 
@@ -249,7 +249,7 @@ class User < ActiveRecord::Base
     result = Hash.new(0)
     self.trades.each do |trade|
       trade_time = trade.created_at.time
-      break if trade_time > (time + 12.hours)
+      break if trade_time > (time)
       result[trade.company_id] += trade.num_shares
     end     
 
