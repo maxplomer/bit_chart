@@ -4,7 +4,7 @@ FinanceClone.Views.UserShow = Backbone.View.extend({
 
   events: {
     "submit .form-trade": "submit",
-    "submit form-notification": "submit_notification"
+    "submit .form-notification": "submit_notification"
   },
 
   initialize: function () {
