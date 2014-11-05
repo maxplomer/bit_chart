@@ -231,7 +231,7 @@ class User < ActiveRecord::Base
     end
 
     # temporarily close all positions
-    self.portfolio.keys.each do |company_id|
+    get_temp_portfolio(time).keys.each do |company_id|
       result.push(
         Trade.new(
           user_id: self.id,
@@ -244,5 +244,23 @@ class User < ActiveRecord::Base
 
     result
   end
+
+  def get_temp_portfolio(time)
+    result = Hash.new(0)
+    self.trades.each do |trade|
+      trade_time = trade.created_at.time
+      break if trade_time > (time + 12.hours)
+      result[trade.company_id] += trade.num_shares
+    end     
+
+    result.keys.each do |key|
+      if result[key] == 0
+        result.delete(key)
+      end
+    end
+
+    result
+  end
+
 
 end
