@@ -13,8 +13,35 @@
 
 <br><br>
 
+<!-- profit percent gain - start -->
 
+<% if ( user.escape("profit") < 0 ) {   %>
 
+<font color="red" size="4">
+
+<% } else { %>
+
+<font color="green" size="4">
+
+<% } %>
+
+<% if ( user.escape("profit") > 0 ) {   %>
+
+▲
+
+<% } %>
+
+<% if ( user.escape("profit") < 0 ) {   %>
+
+▼
+
+<% } %>
+
+&#36;<%= Math.abs(user.escape("profit")) %>
+(<%= Math.abs(user.escape("percent_gain")) %>&#37;)
+</font>
+
+<!-- profit percent gain - end -->
 
 
 
