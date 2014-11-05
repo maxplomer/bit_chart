@@ -14,6 +14,20 @@ window.FinanceClone = {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+// for company show page - start
+
 function percent_change(price_now, change) {
   price_prev = price_now - change;
   return truncate( ((price_now / price_prev) - 1) * 100 );
@@ -23,7 +37,6 @@ function truncate(x) {
 }
 
 
-// for company show page
 function getData() {
   var url = "http://query.yahooapis.com/v1/public/yql";
   var symbol = $("#symbol").val();
@@ -54,6 +67,22 @@ function getData() {
       $("#result").text('Request failed: ' + err);
     });
 }
+
+// for company show page - end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

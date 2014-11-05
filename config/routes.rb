@@ -18,6 +18,7 @@ FinanceClone::Application.routes.draw do
 
   namespace :api, :defaults => { :format => :json } do
     resources :companies, :only => [:show, :index]
+    resources :users, :only => [:show, :index]
   end
 end
 
