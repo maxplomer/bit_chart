@@ -14,7 +14,7 @@ class Api::NotificationsController < ApplicationController
 
     user_id = params["user_id"].to_i
     company_id = params["company_id"]
-    percent_swing = params["percent_swing"]
+    percent_swing = params["percent_swing"].to_f
 
 
     # want to delete any notifications already set for company 
