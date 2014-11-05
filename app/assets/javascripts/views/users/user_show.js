@@ -3,7 +3,8 @@ FinanceClone.Views.UserShow = Backbone.View.extend({
   template: JST['users/show'],
 
   events: {
-    "submit form": "submit"
+    "submit .form-trade": "submit",
+    "submit form-notification": "submit_notification"
   },
 
   initialize: function () {
@@ -33,6 +34,22 @@ FinanceClone.Views.UserShow = Backbone.View.extend({
         //Backbone.history.navigate("/", { trigger: true });
       }
     });
-  }
+  },
+
+  submit_notification: function (event) {
+    event.preventDefault();
+    that = this;
+    var params = $(event.currentTarget).serializeJSON();
+    var newNotification = new FinanceClone.Models.Notification(params["notification"]);
+
+    newNotification.save({}, {
+      success: function () {
+        FinanceClone.Collections.notifications.add(newNotification);
+        that.model.fetch();
+        //Backbone.history.navigate("/", { trigger: true });
+      }
+    });
+  },
+
 
 });
