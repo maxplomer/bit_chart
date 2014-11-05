@@ -46,8 +46,8 @@
 <br><br>
 
 <!-- Portfolio - start -->
-<% company_ids = [user.escape("portfolio_keys")] %>
-<% positions = [user.escape("portfolio_values")] %>
+<% company_ids = user.escape("portfolio_keys").split(',') %>
+<% positions = user.escape("portfolio_values").split(','); %>
 
 <table>
   <th>Name</th>
