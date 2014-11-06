@@ -21,7 +21,7 @@ FinanceClone.quote_setInterval;
 function sidebar () {
   FinanceClone.Collections.notification_messages.fetch();
   FinanceClone.Collections.recent_quotes.fetch();
-  FinanceClone.Collections.companies.fetch();
+  //FinanceClone.Collections.companies.fetch();
   var $sidebar = $('#sidebar');
   var sidebarView = new FinanceClone.Views.Sidebar({
     collection: FinanceClone.Collections.recent_quotes
@@ -34,7 +34,7 @@ function sidebar () {
 function navbar () {
   FinanceClone.Collections.notification_messages.fetch();
   FinanceClone.Collections.recent_quotes.fetch();
-  FinanceClone.Collections.companies.fetch();
+  //FinanceClone.Collections.companies.fetch();
   var $navbar = $('#navbar');
   var navbarView = new FinanceClone.Views.Navbar({
     collection: FinanceClone.Collections.recent_quotes

@@ -25,7 +25,7 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
   userShow: function (id) {
     navbar();
     sidebar();
-    FinanceClone.Collections.companies.fetch();
+    //FinanceClone.Collections.companies.fetch();
     FinanceClone.Collections.follows.fetch();
     var user = FinanceClone.Collections.users.getOrFetch(id);
     var showView = new FinanceClone.Views.UserShow({
