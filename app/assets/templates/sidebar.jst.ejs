@@ -22,7 +22,7 @@ Recent Quotes<br><br>
 <!-- will need to reverse array -->
 <% recent_quotes = recent_quotes.toJSON().reverse() %>
 
-<table>
+<table class="table table-condensed">
 
 <% if (FinanceClone.Collections.companies.length > 0) { %>
 <% if (recent_quotes.length > 0) { %>
@@ -49,7 +49,7 @@ Recent Quotes<br><br>
               type="hidden"
               value="<%= company.escape("symbol") %>">
 
-            <input type="submit" value="<%= company.escape("symbol") %>">
+            <input type="submit" value="<%= company.escape("symbol") %>" class="btn-link">
           </form>
           <!-- Get a quote - end -->
         </td>
