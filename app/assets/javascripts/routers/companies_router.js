@@ -12,6 +12,7 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
   },
 
   show: function (id) {
+    sidebar();
     var company = FinanceClone.Collections.companies.getOrFetch(id);
     var showView = new FinanceClone.Views.CompanyShow({ 
       model: company 
@@ -21,6 +22,7 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
   },
 
   userShow: function (id) {
+    sidebar();
     FinanceClone.Collections.companies.fetch();
     FinanceClone.Collections.follows.fetch();
     var user = FinanceClone.Collections.users.getOrFetch(id);
@@ -33,6 +35,7 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
   },
 
   usersIndex: function () {
+    sidebar();
     FinanceClone.Collections.users.fetch();
     var indexView = new FinanceClone.Views.UsersIndex({
       collection: FinanceClone.Collections.users
@@ -41,6 +44,7 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
   },
 
   usersFollowIndex: function () {
+    sidebar();
     FinanceClone.Collections.users.fetch();
     var indexView = new FinanceClone.Views.UsersFollowIndex({
       collection: FinanceClone.Collections.users
