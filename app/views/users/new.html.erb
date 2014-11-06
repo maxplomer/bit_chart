@@ -14,6 +14,9 @@
 </head>
 <body class="sign-in">
 
+
+
+
 <h1><font color="blue" face="verdana"><i>bit</i></font><font color="green">Chart</font><font color="orange">.</font></font><font color="red"><i>co</i></font></h1>
 
 <%= link_to "Sign In", new_session_url %> |
@@ -50,6 +53,21 @@
 
   <input type="submit" value="Sign up" class="btn btn-default">
 </form>
+
+
+    <!-- Errors - start -->
+    <% if flash[:errors] %>
+    <br><br><hr>
+    <h3>Please fix the following errors:</h3>
+    <ul>
+      <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+      <% end %>
+    </ul>
+    <br>
+    
+    <% end %>
+    <!-- Errors - end -->
 
 
 </body>

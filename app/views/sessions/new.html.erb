@@ -67,7 +67,19 @@
   <input type="submit" value="Sign in as demo account" class="btn btn-default">
 </form>
 
-
+    <!-- Errors - start -->
+    <% if flash[:errors] %>
+    <br><br><hr>
+    <h3>Please fix the following errors:</h3>
+    <ul>
+      <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+      <% end %>
+    </ul>
+    <br>
+    
+    <% end %>
+    <!-- Errors - end -->
 
 
 

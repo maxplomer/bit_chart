@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       redirect_to root_url
     else
       flash.now[:errors] = ["Invalid Credentials"]
-      render :new
+      render :new, :layout => false
     end
   end
 
