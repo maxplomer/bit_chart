@@ -49,6 +49,7 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
   },
 
   home: function () {
+    sidebar();
     //will eventually want to fetch notification messages and recent quotes, no!! this will be done elsewhere
     var homeView = new FinanceClone.Views.Home({});
     this._swapView(homeView);
@@ -61,3 +62,6 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
     this.$rootEl.html(view.render().$el);
   }
 });
+
+
+
