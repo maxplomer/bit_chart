@@ -21,7 +21,10 @@
 <br><br>
 
 <hr>
-    <!-- Recent quotes - start -->
+
+
+<!-- Recent quotes - start -->
+
 Recent Quotes<br><br>
 
 <% myid = window.currentUser.id %>
@@ -41,7 +44,24 @@ Recent Quotes<br><br>
 
 
       <tr>
-        <td><%= company.escape("symbol") %></td>
+        <td>
+          <!-- Get a quote - start -->   
+          <form  class="quote-form">
+            <input
+              id="recent_quote_user_id"
+              name="recent_quote[user_id]"
+              type="hidden"
+              value="<%= window.currentUser.id %>">
+            <input
+              id="recent_quote_symbol"
+              name="recent_quote[symbol]"
+              type="hidden"
+              value="<%= company.escape("symbol") %>">
+
+            <input type="submit" value="<%= company.escape("symbol") %>">
+          </form>
+          <!-- Get a quote - end -->
+        </td>
         <td><%= company.escape("price") %></td>
         <td>
           <% if (Number(company.escape("change")) < 0) { %>
@@ -59,11 +79,7 @@ Recent Quotes<br><br>
 <% } %>
 </table>
 
-
-
-
-
-    <!-- Recent quotes - end -->
+<!-- Recent quotes - end -->
 
 
 
