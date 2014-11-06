@@ -4,6 +4,11 @@
     <!-- Get a quote - start -->   
     <form  class="quote-form">
       <input
+        id="recent_quote_user_id"
+        name="recent_quote[user_id]"
+        type="hidden"
+        value="<%= window.currentUser.id %>">
+      <input
         id="recent_quote_symbol"
         name="recent_quote[symbol]"
         type="text"

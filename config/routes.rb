@@ -24,6 +24,7 @@ FinanceClone::Application.routes.draw do
     resources :trades, :only => [:show, :index, :create]
     resources :notifications, :only => [:show, :index, :create]
     resources :follows, :only => [:show, :index, :create, :destroy]
+    resources :recent_quotes, :only => [:show, :index, :create]
   end
 end
 

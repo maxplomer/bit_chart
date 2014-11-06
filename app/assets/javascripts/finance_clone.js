@@ -16,8 +16,11 @@ window.FinanceClone = {
 
 
 function sidebar () {
+  FinanceClone.Collections.recent_quotes.fetch();
   var $sidebar = $('#sidebar');
-  var sidebarView = new FinanceClone.Views.Sidebar({});
+  var sidebarView = new FinanceClone.Views.Sidebar({
+    collection: FinanceClone.Collections.recent_quotes
+  });
   $sidebar.html(sidebarView.render().$el);
 }
 

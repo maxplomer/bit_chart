@@ -8,6 +8,10 @@ FinanceClone.Views.Sidebar = Backbone.View.extend({
     "submit .quote-form": "getQuote"
   },
 
+  initialize: function () {
+    this.listenTo(this.collection, "sync", this.render);
+  },
+
   render: function () {
     var renderedContent = this.template({});
     this.$el.html(renderedContent);
@@ -16,6 +20,15 @@ FinanceClone.Views.Sidebar = Backbone.View.extend({
 
   getQuote: function (event) {
   	event.preventDefault();
-  	alert("gimme quote!")
+    that = this;
+    var params = $(event.currentTarget).serializeJSON();
+    var newRecentQuote = new FinanceClone.Models.RecentQuote(params["recent_quote"]);
+
+    newRecentQuote.save({}, {
+      success: function () {
+        FinanceClone.Collections.recent_quotes.add(newRecentQuote);
+        //Backbone.history.navigate("/", { trigger: true });
+      }
+    });
   }
 });
