@@ -24,14 +24,27 @@ FinanceClone.Views.Navbar = Backbone.View.extend({
   },
 
   getQuote: function (event) {
-  	event.preventDefault();
+    event.preventDefault();
     that = this;
     var params = $(event.currentTarget).serializeJSON();
     var newRecentQuote = new FinanceClone.Models.RecentQuote(params["recent_quote"]);
 
     newRecentQuote.save({}, {
       success: function () {
+        
+        var attrs = {
+          user_id: Number(window.currentUser.id), 
+          company_id: Number(newRecentQuote.escape("company_id"))
+        };
+
+        FinanceClone.Collections.recent_quotes.fetch();
         FinanceClone.Collections.recent_quotes.add(newRecentQuote);
+
+        var old_quote = FinanceClone.Collections.recent_quotes.where(attrs);
+        old_quote = old_quote[0];
+        old_quote.destroy();
+
+
         var path = "#companies/" + newRecentQuote.escape("company_id") + "";
         Backbone.history.navigate(path, { trigger: true });
       }
