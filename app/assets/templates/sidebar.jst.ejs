@@ -25,6 +25,7 @@
 Recent Quotes<br><br>
 
 <% myid = window.currentUser.id %>
+<!-- will need to reverse array -->
 <% recent_quotes = recent_quotes.toJSON().reverse() %>
 
 <table>
@@ -42,7 +43,13 @@ Recent Quotes<br><br>
       <tr>
         <td><%= company.escape("symbol") %></td>
         <td><%= company.escape("price") %></td>
-        <td><%= company.escape("change") %></td>
+        <td>
+          <% if (Number(company.escape("change")) < 0) { %>
+            <font color="red"><%= company.escape("change") %></font>
+          <% } else { %>
+            <font color="green">+<%= company.escape("change") %></font>
+          <% } %>
+        </td>
       </tr>
     <% } %>
   <% } %>
@@ -51,23 +58,6 @@ Recent Quotes<br><br>
 <% } %>
 <% } %>
 </table>
-
-<!-- will need to reverse array -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
