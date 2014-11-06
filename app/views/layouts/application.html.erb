@@ -15,6 +15,8 @@
   </head>
 
 <header>
+
+
   <nav class="group">
     <h2 class="logo"><font color="blue" face="verdana"><i>bit</i></font><font color="green">Chart</font><font color="orange">.</font></font><font color="red"><i>co</i></font></h2>
     <!-- Get a quote - start -->
@@ -87,7 +89,18 @@
 
   <body>
 
-
+    <!-- Errors - start -->
+    <% if flash[:errors] %>
+    <h3>Please fix the following errors:</h3>
+    <ul>
+      <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+      <% end %>
+    </ul>
+    <br>
+    <hr>
+    <% end %>
+    <!-- Errors - end -->
 
 
 <div class="row main-row">

@@ -5,8 +5,10 @@ class TradesController < ApplicationController
  
     symbol = params["trade"]["symbol"].upcase
     company = Company.find_by_symbol(symbol)
-    price = MarketBeat.last_trade_real_time(company.symbol)
-    
+    unless company.nil?
+      price = MarketBeat.last_trade_real_time(company.symbol)
+    end
+
     if company.nil?
       flash[:errors] = ["We don't trade that ticker"]
       redirect_to user_url(current_user)
