@@ -13,7 +13,9 @@ FinanceClone.Views.Sidebar = Backbone.View.extend({
   },
 
   render: function () {
-    var renderedContent = this.template({});
+    var renderedContent = this.template({
+      recent_quotes: this.collection
+    });
     this.$el.html(renderedContent);
     return this;
   },

@@ -17,3 +17,53 @@
       <input type="submit" value="Search">
     </form>
     <!-- Get a quote - end -->
+
+<br><br>
+
+    <!-- Recent quotes - start -->
+
+
+    <%= window.currentUser.id %>
+
+    <% recent_quotes = recent_quotes.toJSON() %>
+
+    <% if (recent_quotes.length > 0) { %>
+
+    <% recent_quote = recent_quotes[0] %>
+
+    <%= recent_quote.user_id %>
+
+    <% } %>
+
+<!-- will need to reverse array -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Recent quotes - end -->
+
+
+
+
+
+
+
+
+
+
