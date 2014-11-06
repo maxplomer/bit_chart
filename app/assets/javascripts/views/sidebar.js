@@ -10,6 +10,7 @@ FinanceClone.Views.Sidebar = Backbone.View.extend({
 
   initialize: function () {
     this.listenTo(this.collection, "sync", this.render);
+    this.listenTo(FinanceClone.Collections.companies, "sync", this.render);
   },
 
   render: function () {

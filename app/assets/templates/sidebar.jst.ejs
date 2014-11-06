@@ -20,20 +20,37 @@
 
 <br><br>
 
+<hr>
     <!-- Recent quotes - start -->
+Recent Quotes<br><br>
+
+<% myid = window.currentUser.id %>
+<% recent_quotes = recent_quotes.toJSON().reverse() %>
+
+<table>
+
+<% if (FinanceClone.Collections.companies.length > 0) { %>
+<% if (recent_quotes.length > 0) { %>
+  <% counter = 0 %>
+  <% for (var i=0; i<recent_quotes.length; i++) { %>
+    <% if (recent_quotes[i].user_id == myid) { %>
+       <% var company_id = Number(recent_quotes[i].company_id) %>
+       <% var company = FinanceClone.Collections.companies.where({ id: company_id }) %>
+       <% company = company[0] %>
 
 
-    <%= window.currentUser.id %>
-
-    <% recent_quotes = recent_quotes.toJSON() %>
-
-    <% if (recent_quotes.length > 0) { %>
-
-    <% recent_quote = recent_quotes[0] %>
-
-    <%= recent_quote.user_id %>
-
+      <tr>
+        <td><%= company.escape("symbol") %></td>
+        <td><%= company.escape("price") %></td>
+        <td><%= company.escape("change") %></td>
+      </tr>
     <% } %>
+  <% } %>
+
+
+<% } %>
+<% } %>
+</table>
 
 <!-- will need to reverse array -->
 

@@ -17,13 +17,15 @@ window.FinanceClone = {
 
 function sidebar () {
   FinanceClone.Collections.recent_quotes.fetch();
+  FinanceClone.Collections.companies.fetch();
   var $sidebar = $('#sidebar');
   var sidebarView = new FinanceClone.Views.Sidebar({
     collection: FinanceClone.Collections.recent_quotes
   });
   $sidebar.html(sidebarView.render().$el);
 }
-
+//later want to send collection2: FinanceClone.Collections.companies
+//and add listener so that rerenders when price changes?
 
 
 
