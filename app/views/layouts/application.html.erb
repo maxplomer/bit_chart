@@ -145,11 +145,11 @@
 
             </td>
             <% quote = company.quotes.last %>
-            <td><%= quote.price %></td>
-            <td>
+            <td><div class="recent-quote-price-change"><%= quote.price %></div></td>
+            <td><div class="recent-quote-price-change">
               <font color="<%= (quote.change < 0) ? "red" : "green" %>">
               <%= "+" if quote.change > 0 %><%= quote.change %>
-            </font>
+            </font></div>
             </td>
           </tr>
           <% counter += 1 %>
