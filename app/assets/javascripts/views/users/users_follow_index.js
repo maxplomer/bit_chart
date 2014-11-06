@@ -1,6 +1,6 @@
-FinanceClone.Views.UsersIndex = Backbone.View.extend({
+FinanceClone.Views.UsersFollowIndex = Backbone.View.extend({
 
-  template: JST['users/index'],
+  template: JST['users/followindex'],
 
   initialize: function () {
     this.listenTo(this.collection, "sync", this.render);

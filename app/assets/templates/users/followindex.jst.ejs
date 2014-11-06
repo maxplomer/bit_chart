@@ -1,10 +1,15 @@
 <b><font size="6"> Leaderboard </font></b>&nbsp;&nbsp;&nbsp;
 
-<a href="#usersfollow">show followed only</a>
+<a href="#users">show all</a>
 
 <br><br>
 
+<% var myid = window.currentUser.id %>
 
+<% if (users.length > 0) { %>
+  <% var leader_ids = users.get(myid).escape("leader_ids").split(',') %>
+  <% leader_ids.indexOf("2") %>
+<% } %>
 
 <% users = users.toJSON() %>
 
@@ -16,11 +21,12 @@
       <% } else { %>
         <% var plus_sign = "" %>
       <% } %>
+
+      <% if (leader_ids.indexOf(users[i].id.toString()) < 0) continue%>
+
       <td><%= users[i].name %></td>
       <td><%= plus_sign %><%= users[i].percent_gain %>&#37;</td>
       <td><b><a href="#users/<%= users[i].id %>">i</a></b></td>
     </tr>
   <% } %>
 </table>
-
-

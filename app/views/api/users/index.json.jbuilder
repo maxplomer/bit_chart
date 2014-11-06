@@ -52,7 +52,14 @@ json.array!(@users) do |user|
     json.array! follower_ids
   end
 
+  leader_ids = []
+  User.all.each do |leader|
+    leader_ids.push(leader.id) if user.follows?(leader)
+  end
 
+  json.leader_ids do
+    json.array! leader_ids
+  end
 
 
 end
