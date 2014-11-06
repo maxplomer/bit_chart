@@ -14,6 +14,8 @@ window.FinanceClone = {
 };
 
 
+FinanceClone.quote_setInterval;
+
 
 function sidebar () {
   FinanceClone.Collections.notification_messages.fetch();
