@@ -39,8 +39,11 @@ FinanceClone.Views.Sidebar = Backbone.View.extend({
   },
 
   signOut: function (event) {
-    alert("HELLOWORLD")
-
+    $.ajax({
+      url: "/session",
+      type: "delete",
+      success: function(){}
+    });
   }
 
 });
