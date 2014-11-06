@@ -1,5 +1,5 @@
 This is a guide and note for the creation of my final project with the working name "Finance Clone" and tag line "Facebook meets google finance".
-
+    
 
 //// Topic: Initial Rails Installation ////
 
