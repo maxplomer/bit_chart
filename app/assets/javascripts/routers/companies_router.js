@@ -4,6 +4,7 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
   },
 
   routes: {
+    "": "home",
     "users": "usersIndex",
     "usersfollow": "usersFollowIndex",
     "companies/:id": "show",
@@ -45,6 +46,13 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
       collection: FinanceClone.Collections.users
     });
     this._swapView(indexView);
+  },
+
+  home: function () {
+    //will eventually want to fetch notification messages and recent quotes, no!! this will be done elsewhere
+    var homeView = new FinanceClone.Views.Home({});
+    this._swapView(homeView);
+
   },
 
   _swapView: function (view) {
