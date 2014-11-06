@@ -27,9 +27,8 @@ FinanceClone.Views.Sidebar = Backbone.View.extend({
     newRecentQuote.save({}, {
       success: function () {
         FinanceClone.Collections.recent_quotes.add(newRecentQuote);
-        alert(newRecentQuote.escape("company_id"));
-
-        //Backbone.history.navigate("/", { trigger: true });
+        var path = "#companies/" + newRecentQuote.escape("company_id") + "";
+        Backbone.history.navigate(path, { trigger: true });
       }
     });
   }
