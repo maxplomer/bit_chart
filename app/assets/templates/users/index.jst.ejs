@@ -11,9 +11,14 @@
 <table>
   <% for (var i=0; i<users.length; i++) { %>
     <tr>
+      <% if (users[i].percent_gain > 0) { %>
+        <% var plus_sign = "+" %>
+      <% } else { %>
+        <% var plus_sign = "" %>
+      <% } %>
       <td><%= users[i].name %></td>
-      <td><%= users[i].profit %></td>
-      <td><b><a href="#">i</a></b></td>
+      <td><%= plus_sign %><%= users[i].percent_gain %>&#37;</td>
+      <td><b><a href="#users/<%= users[i].id %>">i</a></b></td>
     </tr>
   <% } %>
 </table>
