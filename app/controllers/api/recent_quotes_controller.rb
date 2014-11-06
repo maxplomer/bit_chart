@@ -11,11 +11,11 @@ class Api::RecentQuotesController < ApplicationController
   end
 
   def create
-    logger.info("HELLWORLDHELLOWRLD")
+
     user_id = params["user_id"]
     symbol = params["symbol"].upcase
     company = Company.find_by_symbol(symbol)
-    logger.info(company.name)
+
     unless company.nil?
       duplicate = RecentQuote.where(user_id: params[:user_id], company_id: company.id)
       duplicate[0].destroy unless duplicate[0].nil?
