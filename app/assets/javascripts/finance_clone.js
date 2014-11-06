@@ -28,7 +28,16 @@ function sidebar () {
 //later want to send collection2: FinanceClone.Collections.companies
 //and add listener so that rerenders when price changes?
 
-
+function navbar () {
+  FinanceClone.Collections.notification_messages.fetch();
+  FinanceClone.Collections.recent_quotes.fetch();
+  FinanceClone.Collections.companies.fetch();
+  var $navbar = $('#navbar');
+  var navbarView = new FinanceClone.Views.Navbar({
+    collection: FinanceClone.Collections.recent_quotes
+  });
+  $navbar.html(navbarView.render().$el);
+}
 
 
 

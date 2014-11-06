@@ -1,0 +1,51 @@
+
+<h2 class="logo"><font color="blue" face="verdana"><i>bit</i></font><font color="green">Chart</font><font color="orange">.</font></font><font color="red"><i>co</i></font></h2>
+
+
+    <!-- Get a quote - start -->   
+    <form  class="quote-form">
+      <input
+        id="recent_quote_user_id"
+        name="recent_quote[user_id]"
+        type="hidden"
+        value="<%= window.currentUser.id %>">
+      <input
+        id="recent_quote_symbol"
+        name="recent_quote[symbol]"
+        type="text"
+        placeholder="enter stock ticker">
+
+      <input type="submit" value="Search">
+    </form>
+    <!-- Get a quote - end -->
+
+<br><br>
+
+<!-- Alerts - start -->
+<% myid = window.currentUser.id %>
+<a>Alerts</a>
+
+<% var counter = 0 %>
+<% var messages = FinanceClone.Collections.notification_messages.toJSON().reverse() %>
+
+<ul>
+  <% for (var i=0; i<messages.length; i++) { %>
+    <% if (messages[i].user_id == myid) { %> 
+      <li><%= messages[i].message %></li>  
+
+      <% counter += 1 %>
+      <% if (counter == 5) { break } %>
+    <% } %>
+  <% } %>
+</ul>
+
+<!-- Alerts - end -->
+
+<!-- Edit Account - start -->
+
+<a href="/users/<%= window.currentUser.id %>/edit">Edit Account</a>
+
+<a href="/session/new" class="sign-out">Sign Out</a>
+
+<!-- Edit Account - end -->
+

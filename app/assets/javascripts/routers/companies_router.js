@@ -12,6 +12,7 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
   },
 
   show: function (id) {
+    navbar();
     sidebar();
     var company = FinanceClone.Collections.companies.getOrFetch(id);
     var showView = new FinanceClone.Views.CompanyShow({ 
@@ -22,6 +23,7 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
   },
 
   userShow: function (id) {
+    navbar();
     sidebar();
     FinanceClone.Collections.companies.fetch();
     FinanceClone.Collections.follows.fetch();
@@ -35,6 +37,7 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
   },
 
   usersIndex: function () {
+    navbar();
     sidebar();
     FinanceClone.Collections.users.fetch();
     var indexView = new FinanceClone.Views.UsersIndex({
@@ -44,6 +47,7 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
   },
 
   usersFollowIndex: function () {
+    navbar();
     sidebar();
     FinanceClone.Collections.users.fetch();
     var indexView = new FinanceClone.Views.UsersFollowIndex({
@@ -53,6 +57,7 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
   },
 
   home: function () {
+    navbar();
     sidebar();
     //will eventually want to fetch notification messages and recent quotes, no!! this will be done elsewhere
     var homeView = new FinanceClone.Views.Home({});
