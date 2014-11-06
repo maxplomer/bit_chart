@@ -19,7 +19,9 @@
     </form>
     <!-- Get a quote - end -->
 
-<br><br>
+
+<ul> <!-- CSS CSS CSS -->
+<li class="dropdown"> <!-- CSS CSS CSS -->
 
 <!-- Alerts - start -->
 <% myid = window.currentUser.id %>
@@ -28,7 +30,7 @@
 <% var counter = 0 %>
 <% var messages = FinanceClone.Collections.notification_messages.toJSON().reverse() %>
 
-<ul>
+<ul class="menu">
   <% for (var i=0; i<messages.length; i++) { %>
     <% if (messages[i].user_id == myid) { %> 
       <li><%= messages[i].message %></li>  
@@ -40,12 +42,59 @@
 </ul>
 
 <!-- Alerts - end -->
+</li> <!-- CSS CSS CSS -->
 
+
+
+
+
+<li class="dropdown"> <!-- CSS CSS CSS -->
 <!-- Edit Account - start -->
 
-<a href="/users/<%= window.currentUser.id %>/edit">Edit Account</a>
+<a>Account</a>
+<ul class="menu-account">
 
-<a href="/session/new" class="sign-out">Sign Out</a>
+  <li>
+    Signed in as: <%= window.currentUser.email %>
+  </li>
+
+  <li>
+
+<a href="/users/<%= window.currentUser.id %>/edit" class="btn btn-default">Edit Account</a>
+
+<a href="/session/new" class="sign-out btn btn-default">Sign Out</a>
+
+  </li>
 
 <!-- Edit Account - end -->
+</ul>
+</li>
+</ul> <!-- CSS CSS CSS -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
