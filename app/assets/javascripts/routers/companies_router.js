@@ -4,6 +4,7 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
   },
 
   routes: {
+    "users": "usersIndex",
     "companies/:id": "show",
     "users/:id": "userShow"
   },
@@ -27,6 +28,14 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
     });
     
     this._swapView(showView);
+  },
+
+  usersIndex: function () {
+    FinanceClone.Collections.users.fetch();
+    var indexView = new FinanceClone.Views.UsersIndex({
+      collection: FinanceClone.Collections.users
+    });
+    this._swapView(indexView);
   },
 
   _swapView: function (view) {
