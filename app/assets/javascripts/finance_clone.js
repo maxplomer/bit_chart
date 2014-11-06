@@ -5,6 +5,14 @@ window.FinanceClone = {
   Routers: {},
   initialize: function() {
     //alert("hello from backbone");
+
+    var $sidebar = $('#sidebar');
+
+    // install the sidebar external to the router as it is
+    // independent of any routing
+    var sidebarView = new FinanceClone.Views.Sidebar({});
+    $sidebar.html(sidebarView.render().$el);
+
     new FinanceClone.Routers.Companies({
       $rootEl: $("#content")
     });
