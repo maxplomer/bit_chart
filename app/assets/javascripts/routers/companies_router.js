@@ -19,7 +19,9 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
       model: company 
     });
     
-    this._swapView(showView);
+    this._swapView(showView, true);
+    //this.$rootEl.html(showView.$el); //could pass an arg to _swapview whether or not to swap, 
+    //right now i have zombie views, rerender 
   },
 
   userShow: function (id) {
@@ -65,10 +67,13 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
 
   },
 
-  _swapView: function (view) {
+  _swapView: function (view, dont_render) {
     this._currentView && this._currentView.remove();
     this._currenView = view;
-    this.$rootEl.html(view.render().$el);
+    if (!dont_render) {
+      view.render();  //render puts stuff into the $el
+    }
+    this.$rootEl.html(view.$el);
   }
 });
 
