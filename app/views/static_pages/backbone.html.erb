@@ -14,13 +14,20 @@
 </head>
 <body>
 
+<header>
+  <nav class="group">
+    <div id='navbar'></div>
+  </nav>
+</header>
 
-<div id='navbar'></div>
-
-<div id='sidebar'></div>
-
-<div id="content"></div>
-
+<div class="row main-row">
+  <div class="col-xs-3 col-sidebar">
+    <div id='sidebar'></div>
+  </div>  
+  <div class="col-xs-9 col-mainbar">
+    <div id="content"></div>
+  </div>  
+</div>  
 
  <script type="text/javascript" charset="utf-8">
    $(document).ready(function(){
