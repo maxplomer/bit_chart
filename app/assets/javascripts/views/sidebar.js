@@ -31,6 +31,7 @@ FinanceClone.Views.Sidebar = Backbone.View.extend({
 
     newRecentQuote.save({}, {
       success: function () {
+        FinanceClone.Collections.recent_quotes.fetch();
         FinanceClone.Collections.recent_quotes.add(newRecentQuote);
         var path = "#companies/" + newRecentQuote.escape("company_id") + "";
         Backbone.history.navigate(path, { trigger: true });
