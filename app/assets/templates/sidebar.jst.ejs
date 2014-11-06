@@ -53,14 +53,14 @@ Recent Quotes<br><br>
           </form>
           <!-- Get a quote - end -->
         </td>
-        <td><%= company.escape("price") %></td>
-        <td>
+        <td><div class="recent-quote-price-change"><%= company.escape("price") %></div></td>
+        <td><div class="recent-quote-price-change">
           <% if (Number(company.escape("change")) < 0) { %>
             <font color="red"><%= company.escape("change") %></font>
           <% } else { %>
             <font color="green">+<%= company.escape("change") %></font>
           <% } %>
-        </td>
+        </div></td>
       </tr>
       <% counter += 1 %>
       <% if (counter == 10) { break } %>
