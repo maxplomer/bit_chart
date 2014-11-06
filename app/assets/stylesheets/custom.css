@@ -82,6 +82,7 @@ header > nav {
 header ul {
   float: right;
 }
+
 header > nav > ul > li {
   float: left;
 }
