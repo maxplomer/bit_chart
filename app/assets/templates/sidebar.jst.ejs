@@ -30,8 +30,7 @@ Recent Quotes<br><br>
   <% for (var i=0; i<recent_quotes.length; i++) { %>
     <% if (recent_quotes[i].user_id == myid) { %>
        <% var company_id = Number(recent_quotes[i].company_id) %>
-       <% var company = FinanceClone.Collections.companies.where({ id: company_id }) %>
-       <% company = company[0] %>
+       <% var company = FinanceClone.Collections.companies.get(company_id) %>
 
 
       <tr>
