@@ -231,12 +231,14 @@ class User < ActiveRecord::Base
     end
 
     # temporarily close all positions
-    get_temp_portfolio(time).keys.each do |company_id|
+    my_portfolio = get_temp_portfolio(time)
+
+    my_portfolio.keys.each do |company_id|
       result.push(
         Trade.new(
           user_id: self.id,
           company_id: company_id, 
-          num_shares: -self.portfolio[company_id], 
+          num_shares: -my_portfolio[company_id], 
           price: Company.find(company_id).find_price_from_day(time)
         )
       )
