@@ -89,6 +89,8 @@ User.create(name: "helloworld", email: "helloworld", password: "helloworld")
 #   end
 # end
 
+##### NWL does not return a quote!!!!!
+
 
 
 
