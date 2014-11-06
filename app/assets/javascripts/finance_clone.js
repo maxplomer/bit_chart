@@ -5,6 +5,7 @@ window.FinanceClone = {
   Routers: {},
   initialize: function() {
     //alert("hello from backbone");
+    document.title = 'bitChart.co';
     new FinanceClone.Routers.Companies({
       $rootEl: $("#content")
     });
