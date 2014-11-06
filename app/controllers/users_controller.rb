@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       sign_in(@user)
       #redirect_to user_url(@user)
-      redirect_to static_pages_backbone_url
+      redirect_to root_url
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     @user = current_user
     if params.include?(:id) && current_user.id == params[:id].to_i && @user.update_attributes(user_update_params)
       #redirect_to user_url(@user)
-      redirect_to static_pages_backbone_url
+      redirect_to root_url
     else
       flash.now[:errors] = @user.errors.full_messages
       render :edit

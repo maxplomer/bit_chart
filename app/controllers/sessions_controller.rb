@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     if @user
       sign_in(@user)
       #redirect_to static_pages_home_url
-      redirect_to static_pages_backbone_url
+      redirect_to root_url
     else
       flash.now[:errors] = ["Invalid Credentials"]
       render :new

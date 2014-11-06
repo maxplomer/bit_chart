@@ -14,9 +14,14 @@ FinanceClone::Application.routes.draw do
   
   resources :recent_quotes, :only => [:create]
 
-  root :to => "sessions#new"
+  #root :to => "sessions#new"
 
-  get "static_pages/backbone"
+  #####backbone routes#####
+
+  #get "static_pages/backbone" #root to here, redirect to sessionnew if not logged in
+  #after logged redirect to root url
+
+  root :to => "static_pages#backbone"
   
   namespace :api, :defaults => { :format => :json } do
     resources :companies, :only => [:show, :index]
