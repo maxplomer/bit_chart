@@ -12,12 +12,12 @@ class Api::RecentQuotesController < ApplicationController
 
   def create
 
-    user_id = params["user_id"]
+    user_id = params["user_id"].to_i
     symbol = params["symbol"].upcase
     company = Company.find_by_symbol(symbol)
 
     unless company.nil?
-      duplicate = RecentQuote.where(user_id: params[:user_id], company_id: company.id)
+      duplicate = RecentQuote.where(user_id: user_id, company_id: company.id)
       duplicate[0].destroy unless duplicate[0].nil?
 
       @recent_quote = RecentQuote.new(user_id: user_id, company_id: company.id)
