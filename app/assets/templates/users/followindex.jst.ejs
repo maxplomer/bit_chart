@@ -1,6 +1,6 @@
 <b><font size="6"> Leaderboard </font></b>&nbsp;&nbsp;&nbsp;
 
-<a href="#users">show all</a>
+<a href="#users" class="btn btn-default">show all</a>
 
 <br><br>
 
@@ -13,7 +13,7 @@
 
 <% users = users.toJSON() %>
 
-<table>
+<table class="table table-condensed">
   <% for (var i=0; i<users.length; i++) { %>
     <tr>
       <% if (users[i].percent_gain > 0) { %>
@@ -26,7 +26,7 @@
 
       <td><%= users[i].name %></td>
       <td><%= plus_sign %><%= users[i].percent_gain %>&#37;</td>
-      <td><b><a href="#users/<%= users[i].id %>">i</a></b></td>
+      <td><b><a href="#users/<%= users[i].id %>"><span>i</span></a></b></td>
     </tr>
   <% } %>
 </table>
