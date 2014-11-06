@@ -5,7 +5,8 @@ FinanceClone.Views.Sidebar = Backbone.View.extend({
   //will later need a listenTo for the recent quotes collection and notification messages collection
 
   events: {
-    "submit .quote-form": "getQuote"
+    "submit .quote-form": "getQuote",
+    "click .sign-out": "signOut"
   },
 
   initialize: function () {
@@ -35,5 +36,11 @@ FinanceClone.Views.Sidebar = Backbone.View.extend({
         Backbone.history.navigate(path, { trigger: true });
       }
     });
+  },
+
+  signOut: function (event) {
+    alert("HELLOWORLD")
+
   }
+
 });
