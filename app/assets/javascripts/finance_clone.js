@@ -16,6 +16,7 @@ window.FinanceClone = {
 
 
 function sidebar () {
+  FinanceClone.Collections.notification_messages.fetch();
   FinanceClone.Collections.recent_quotes.fetch();
   FinanceClone.Collections.companies.fetch();
   var $sidebar = $('#sidebar');

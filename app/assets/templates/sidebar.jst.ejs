@@ -20,6 +20,28 @@
 
 <br><br>
 
+<!-- Alerts - start -->
+<% myid = window.currentUser.id %>
+<a>Alerts</a>
+
+<% var counter = 0 %>
+<% var messages = FinanceClone.Collections.notification_messages.toJSON().reverse() %>
+
+<ul>
+  <% for (var i=0; i<messages.length; i++) { %>
+    <% if (messages[i].user_id == myid) { %> 
+      <li><%= messages[i].message %></li>  
+
+      <% counter += 1 %>
+      <% if (counter == 5) { break } %>
+    <% } %>
+  <% } %>
+</ul>
+
+<!-- Alerts - end -->
+
+<br><br>
+
     <!-- Home menu - start -->
     <br>
     <a href="#">Home</a> <br>
@@ -45,7 +67,7 @@ Recent Quotes<br><br>
 
 <% if (FinanceClone.Collections.companies.length > 0) { %>
 <% if (recent_quotes.length > 0) { %>
-  <% counter = 0 %>
+  <% var counter = 0 %>
   <% for (var i=0; i<recent_quotes.length; i++) { %>
     <% if (recent_quotes[i].user_id == myid) { %>
        <% var company_id = Number(recent_quotes[i].company_id) %>
@@ -81,6 +103,8 @@ Recent Quotes<br><br>
           <% } %>
         </td>
       </tr>
+      <% counter += 1 %>
+      <% if (counter == 10) { break } %>
     <% } %>
   <% } %>
 
