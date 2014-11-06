@@ -31,7 +31,7 @@
         name="follow[leader_id]"
         type="hidden"
         value="<%= user.escape("id") %>">
-      <input type="submit" value="Unfollow">
+      <input type="submit" value="Unfollow" class="btn btn-default">
     </form>
   <% } else { %>
     <form class="form-follow">
@@ -46,7 +46,7 @@
         name="follow[leader_id]"
         type="hidden"
         value="<%= user.escape("id") %>">
-      <input type="submit" value="Follow">
+      <input type="submit" value="Follow" class="btn btn-default">
     </form>
   <% } %>
 
