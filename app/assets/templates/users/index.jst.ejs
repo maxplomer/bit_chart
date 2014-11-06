@@ -4,9 +4,18 @@
 
 <br><br>
 
-<% var num_users = users.length %>
 
-<%= num_users %>
 
+<% users = users.toJSON() %>
+
+<table>
+  <% for (var i=0; i<users.length; i++) { %>
+    <tr>
+      <td><%= users[i].name %></td>
+      <td><%= users[i].profit %></td>
+      <td><b><a href="#">i</a></b></td>
+    </tr>
+  <% } %>
+</table>
 
 

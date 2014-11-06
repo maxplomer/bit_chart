@@ -2,6 +2,11 @@ FinanceClone.Collections.Users = Backbone.Collection.extend({
   model: FinanceClone.Models.User,
   url: '/api/users',
 
+  comparator: function(user) {
+    return -user.get('profit');
+  },
+
+
   getOrFetch: function (id) {
     var users = this;
 
