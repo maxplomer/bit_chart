@@ -119,10 +119,14 @@
     <td><%= company.escape("price") %></td>
     <td>
       <% if (company.escape("change") < 0) { %>
-        <font color="red"><%= company.escape("change") %></font>
+        <font color="red"><%= company.escape("change") %>
+          (<%= percent_change(company.escape("price"), company.escape("change")) %>&#37;)
+        </font>
       <% } else { %>
         <font color="green">
-        <% if (company.escape("change") > 0) { %>+<% } %><%= company.escape("change") %></font>
+          <% if (company.escape("change") > 0) { %>+<% } %><%= company.escape("change") %>
+          (<%= percent_change(company.escape("price"), company.escape("change")) %>&#37;)
+        </font>
       <% } %>
     </td>
     <td><%= positions[i] %></td>
