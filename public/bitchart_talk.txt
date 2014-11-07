@@ -104,6 +104,7 @@ if you could create a zero % alert it would always trigger
 every time I call the get new quotes method (Quote.update_quotes), I also call the generate notification messages method (Notification.generate_messages) , which checks if any tolerance has been exceeded and creates the appropriate message, which appears in the nav bar drop down menu
 
 
+
 *** PULLING STOCK QUOTES ***
 
 To get new stock quotes I call a method Quote.update_quotes
