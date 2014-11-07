@@ -26,9 +26,10 @@
 
 <br>
 
+<% var price_graph_data_x_axis = company.escape("price_graph_data_x_axis").split(',') %>
+<% var x = new Date(price_graph_data_x_axis[0]) %>
+
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-
-
 
 <script type="text/javascript">
 
@@ -78,7 +79,7 @@ $(function () {
             type: 'area',
             name: 'Price',
             pointInterval: 600 * 1000,
-            pointStart: Date.UTC(2014, 10, 4, 9,30),
+            pointStart: Date.UTC(<%= x.getFullYear() %>, <%= x.getMonth() %>, <%= x.getDate() %>, 9,30),
             data: [<%= company.escape("price_graph_data_y_axis") %>]
 
         }]
