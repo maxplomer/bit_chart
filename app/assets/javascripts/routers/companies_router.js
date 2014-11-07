@@ -35,7 +35,7 @@ FinanceClone.Routers.Companies = Backbone.Router.extend({
       collection: FinanceClone.Collections.companies
     });
     
-    this._swapView(showView);
+    this._swapView(showView, true);
   },
 
   usersIndex: function () {
