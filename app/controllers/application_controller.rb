@@ -33,7 +33,8 @@ class ApplicationController < ActionController::Base
 
   def require_signed_out!
     #redirect_to user_url(current_user) if signed_in?
-    redirect_to static_pages_backbone_url if signed_in?
+    #redirect_to static_pages_backbone_url if signed_in?
+    sign_out if signed_in?
   end
 
 end
