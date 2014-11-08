@@ -2,6 +2,10 @@ FinanceClone.Collections.RecentQuotes = Backbone.Collection.extend({
   model: FinanceClone.Models.RecentQuote,
   url: '/api/recent_quotes',
 
+  comparator: function(recent_quote) {
+    return recent_quote.get('id');
+  },
+
   getOrFetch: function (id) {
     var recent_quotes = this;
 
