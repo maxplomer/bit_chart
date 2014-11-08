@@ -74,13 +74,13 @@ Also things are further complicated by heroku being on UTC time, and not to ment
 
 *** RECENT QUOTES ***
 
-I use a little trick here, these are actually buttons that i made to look like links
+I use a little trick here, these are actually buttons that I made to look like links
 
 when you get a quote you are actually creating a new recent_quote model which also looks for a duplicate and deletes it
 
 then you are redirected to the company page
 
-For recent quotes in backbone have toale sure to remove old from collection because of you only rely on fetch you'll have a duplicate while you wait
+For recent quotes in backbone have to make sure to remove old from collection because of you only rely on fetch you'll have a duplicate while you wait
 
 var attrs = {
   user_id: Number(window.currentUser.id), 
