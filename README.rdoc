@@ -1,28 +1,206 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a technical talk discussing all the amazing features in my app!
 
-Things you may want to cover:
+== PROFIT
 
-* Ruby version
+To calculate profit and percent gain, we have to temporarily close all your positions at current market rate, we call this temp_trades and the method to generate it get_temp_trades.
 
-* System dependencies
+For example lets say you bought 100 shares of tesla at $200 and its currently trading at $300
 
-* Configuration
+[Your trades history is:]
+  number of shares: N = [100]
 
-* Database creation
+  price of shares: P = [200]
 
-* Database initialization
+[Your temp trades is:]
+  number of shares: N = [100, -100]
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+  price of shares: P = [200, 300]
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+The current profit is the negative dot product of the share price and number of shares vectors.
+
+This only works if opening a short position or selling shares you own is considered negative shares.
+
+The reason you need to take the negative of this dot product, is because the money coming in is always negative, and the money going out is always positive.
+
+
+profit = -1 * sum( N * P ) = -1 * ( 100 * 200 - 100 * 300 ) = $ 10,000
+
+
+
+== PERCENT GAIN 
+
+The percent gain is more complicated, you need to separate how much cash is going out and coming in, rather than just take the dot product of all trade vectors.
+
+Cash coming in is always the sell, or shorting, so you add up all the shorting or selling transactions and divide that by by the buying (closing short) transactions.
+
+Then do minus 1 and times 100 just like any percent change calculation.
+
+
+[cash coming in:]
+  C_in = -1 * sum ( N * P )     <--- only rows where N is negative
+
+[cash going out:]  
+  C_out = sum ( N * P )     <--- only rows where N is positive
+
+
+percent_gain = (C_in/C_out - 1) * 100
+
+C_in = -1 * ( -100 * 300 ) = $ 30,000
+
+C_out = 100 * 200 = $ 20,000
+
+percent_gain = (30000 / 20000 - 1) * 100 = 50 %
+
+
+
+== PERFORMANCE GRAPH
+
+The performance graph goes back through the data I've pulled from the market and stored in my database.
+
+I set the first point to date of first trade and profit zero.
+
+Then I iterate through each day since and call a function, self.profit_date(time), that gives you the profit from that day, it is very similar to the profit function to calculate current profit, except that it takes an input of time, because when it generates temp_trades, I only want the trades that are generated prior to the time input I give it.
+
+Also when generating temp_trades for a given time, I must close your positions using the stock price from that day.
+
+There are a lot of helper functions, 2 of which are:
+
+* Method to find the stock price for a company at a given day, def find_price_from_day(time), which takes the price at the open. The trick to this method is that if its a saturday, it starts looking in reverse and pulls the last quote at the end of the day on friday.
+
+* Method to find your portfolio on a given date, get_temp_portfolio(time), which goes through and adds all your transactions up to the input time. If any stock has zero num_shares (you already closed your position), then it is removed from the portfolio hash.
+
+Its a lot of working with the created_at attribute.  
+
+Also things are further complicated by heroku being on UTC time, and not to mention that daylight saving time temporarily messed up my code, because UTC time does not change with daylight savings.
+
+
+
+== RECENT QUOTES 
+
+I use a little trick here, these are actually buttons that I made to look like links.
+
+When you get a quote you are actually creating a new recent_quote model, which also looks for a duplicate and deletes it.
+
+Then you are redirected to the company page
+
+For recent quotes in backbone we have to make sure to remove the old recent quote from collection because if you only rely on fetch you'll have a duplicate while you wait!
+
+  var attrs = {
+    user_id: Number(window.currentUser.id), 
+    company_id: Number(newRecentQuote.escape("company_id"))
+  };
+
+  var old_quote = FinanceClone.Collections.recent_quotes.where(attrs);
+  old_quote = old_quote[0];
+  old_quote.destroy();
+
+
+
+== NOTIFICATIONS / ALERTS 
+
+Similarly to recent quotes, when you set a notification it looks for duplicates and deletes them, because you can only have one notification set per user per stock.
+
+I have a feature where as to remove the alert you set it to zero, since we always remove duplicates when we call, we just don't save it the tolerance if set to zero, therefore implicitly removing the previously set alert.
+
+If you could create a zero % alert it would always trigger!
+
+Every time I call the get new quotes method (Quote.update_quotes), I also call the generate notification messages method (Notification.generate_messages) , which checks if any tolerance has been exceeded and creates the appropriate message, which appears in the nav bar drop down menu.
+
+
+
+== PULLING STOCK QUOTES 
+
+To get new stock quotes I call a method Quote.update_quotes .
+
+In this method we first check whether we are during the trading day (don't want afterhours quotes) by calling my Quote.during_day? function.
+
+In Quote.during_day? I use a little trick: convert the times to minutes from midnight, and using rubys .between?() method to see if the current time is between the open and the close.
+
+
+
+== SCHEDULER 
+
+Locally I use whenever gem which adds a scheduled event to your computer's crontab.
+
+This gem is really cool because you don't even have to have your server running, as long as you are connected to the internet, crontab will start a rails instance and pull the stock quotes from the web, and save to your db!
+
+On heroku I use the heroku scheduler which requires that you create a task in your app, and then tell heroku to call it.
+
+I am constantly calling Quote.update_quotes, but when Quote.during_day? is false it just doesn't save any.
+
+
+
+== LIVE QUOTE IN JAVASCRIPT
+
+This is neat because yahoo finance api allows you to send an actual sql query to the yahoo finance api server.  Then replace the quote and change numbers on company show page using jquery.
+
+I use set interval to constantly get the stock quotes, problem is that when you go to a new page it will get glitchy and sometimes quickly display the quote from the previous company you were looking at. This glitchy behavior is stopped by clearing my interval every time I set a new one.
+
+  <script language="JavaScript">
+    clearInterval(FinanceClone.quote_setInterval);
+    getData();
+    FinanceClone.quote_setInterval = setInterval(getData, 3000);
+  </script>
+
+Also on the backbone company show page, I only show page once fetch is complete, that avoids annoying double drawing of graph.
+
+This is accomplished by passing an extra input to _swapView called dont_render, set to true.
+
+Only if dont_render is false do we call view.render()
+
+  _swapView: function (view, dont_render) {
+    this._currentView && this._currentView.remove();
+    this._currenView = view;
+    if (!dont_render) {
+      view.render();  //render puts stuff into the $el
+    }
+    this.$rootEl.html(view.$el);
+  }
+
+
+
+== CHART GEM 
+
+Chose to use a gradient shading.
+
+In rails the chart can read a hash of dates and values, but javascript is a little more tricky.
+
+For javascript I break up the hash into arrays, and send them up using jbuilder, and read the first day from the x axis data. Its a little tricky to convert the string to a utc time object at the exact time I want.
+
+Then I use an interval of 10 minutes, or 1 day for the performance graph
+
+
+  <% var price_graph_data_x_axis = company.escape("price_graph_data_x_axis").split(',') %>
+  <% var x = new Date(price_graph_data_x_axis[0]) %>
+
+  ...
+
+  series: [{
+    type: 'area',
+    name: 'Price',
+    pointInterval: 600 * 1000,
+    pointStart: Date.UTC(<%= x.getFullYear() %>, <%= x.getMonth() %>, <%= x.getDate() %>, 9,30),
+    data: [<%= company.escape("price_graph_data_y_axis") %>]
+  }]
+
+
+
+== OPTIMIZATION
+
+When I added the s&p 500 companies to the database, I initially saw a huge slow down when going to the company show page (stock quote page), but then I changed my code to fetch companies initially when the app loads.
+
+Since there are a lot of companies, fetching them in the app initialize function really speeds up the app once you get over the initial loading.
+
+
+
+
+
+
+
+
+
+
+
