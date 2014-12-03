@@ -7,11 +7,11 @@ class Company < ActiveRecord::Base
     dependent: :destroy
   )
   
-  def find_price_from_day(time)
-    return nil if self.quotes.empty?
+  def Company.find_price_from_day(time, my_quotes_company)
+    return nil if my_quotes_company.empty?
 
     #this will grab a quote from beginning of day if exists
-    self.quotes.each do |quote|
+    my_quotes_company.each do |quote|
     	qtime = quote.created_at.time
         if qtime.day == time.day && qtime.month == time.month && qtime.year == time.year
           return quote.price
@@ -21,7 +21,7 @@ class Company < ActiveRecord::Base
     #if its a saturday, we want to return the last quote of the day
     while true
       time = time - 1.day
-      self.quotes.reverse.each do |quote|
+      my_quotes_company.reverse.each do |quote|
         qtime = quote.created_at.time
           if qtime.day == time.day && qtime.month == time.month && qtime.year == time.year
             return quote.price

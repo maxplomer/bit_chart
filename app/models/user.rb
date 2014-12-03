@@ -54,10 +54,39 @@ class User < ActiveRecord::Base
     foreign_key: :leader_id,
   )
 
+  def company_list
+    #part of profit graph algorithm speed up
+    list = []
+
+    self.trades.each do |trade|
+      company = Company.find(trade.company_id)
+      list << company unless list.include?(company)
+    end 
+
+    list
+  end
+
+  def get_my_quotes
+
+    # structure 
+    # {company_id => company_quotes, etc ...}
+ 
+    list = company_list
+    result = {}
+
+    list.each do |company|
+      result[company.id] = company.quotes
+    end
+    
+    result
+  end
+
   def profit_graph_data_hash
     data = {}
 
     return data if self.trades.length == 0
+
+    my_quotes = get_my_quotes
 
     time = self.trades.first.created_at.time
     data[time] = 0
@@ -72,7 +101,7 @@ class User < ActiveRecord::Base
 
       break if time > now
 
-      data[time] = truncate(self.profit_date(time))
+      data[time] = truncate(self.profit_date(time, my_quotes))
     end
 
     data[now] = self.profit
@@ -125,8 +154,8 @@ class User < ActiveRecord::Base
     truncate_round(result)
   end
 
-  def profit_date(time)
-    temp_trades = get_temp_trades_date(time)
+  def profit_date(time, my_quotes)
+    temp_trades = get_temp_trades_date(time, my_quotes)
 
     result = 0
     temp_trades.each do |trade|
@@ -221,7 +250,7 @@ class User < ActiveRecord::Base
     (x * 100).round / 100.0
   end
 
-  def get_temp_trades_date(time)
+  def get_temp_trades_date(time, my_quotes)
     #copy trades 
     result = []
     self.trades.each do |trade| 
@@ -234,12 +263,15 @@ class User < ActiveRecord::Base
     my_portfolio = get_temp_portfolio(time)
 
     my_portfolio.keys.each do |company_id|
+
+      my_quotes_company = my_quotes[company_id] #part of profit graph algorithm speed up
+
       result.push(
         Trade.new(
           user_id: self.id,
           company_id: company_id, 
           num_shares: -my_portfolio[company_id], 
-          price: Company.find(company_id).find_price_from_day(time)
+          price: Company.find_price_from_day(time, my_quotes_company)
         )
       )
     end
