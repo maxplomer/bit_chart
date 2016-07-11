@@ -23,3 +23,27 @@ I manually looked up the id's of the quote i would like to delete ( 2514294 -> 2
 
 
 Then i need to move up the trades to recent dates, and change the price of those those to reflect the stock price at that time
+
+Lets check out the dates of the trades
+
+    > Trade.all.each { |trade| p trade.created_at }
+    Sat, 14 Nov 2015 16:28:12 UTC +00:00
+    Sun, 15 Nov 2015 15:15:42 UTC +00:00
+    Wed, 18 Nov 2015 15:00:17 UTC +00:00
+    Wed, 18 Nov 2015 15:01:05 UTC +00:00
+    Wed, 18 Nov 2015 15:03:12 UTC +00:00
+    Wed, 18 Nov 2015 15:03:19 UTC +00:00
+    Wed, 18 Nov 2015 15:03:26 UTC +00:00
+    Fri, 20 Nov 2015 14:49:37 UTC +00:00
+    Sun, 22 Nov 2015 20:38:05 UTC +00:00
+
+Need to add 6 months to trades
+
+
+Trade.all.each do |trade|
+   trade.created_at = trade.created_at + 6.months
+   trade.save
+end
+
+
+
