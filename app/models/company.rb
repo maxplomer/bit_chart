@@ -12,7 +12,7 @@ class Company < ActiveRecord::Base
 
     #this will grab a quote from beginning of day if exists
     my_quotes_company.each do |quote|
-    	qtime = quote.created_at.time
+      qtime = quote.created_at.time
         if qtime.day == time.day && qtime.month == time.month && qtime.year == time.year
           return quote.price
         end
@@ -37,7 +37,7 @@ class Company < ActiveRecord::Base
     #only want graph to erase at 9:30am when new quote is pulled
     day_last_quote = self.quotes.last.created_at.time.day
 
-    self.quotes.reverse.each do |quote|
+    self.quotes.order("id").reverse.each do |quote|
       break if quote.created_at.time.day != day_last_quote
 
       data[quote.created_at.time] = quote.price

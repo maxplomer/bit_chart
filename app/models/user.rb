@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
     result = {}
 
     list.each do |company|
-      result[company.id] = company.quotes
+      result[company.id] = company.quotes.order("id")
     end
     
     result
@@ -234,7 +234,7 @@ class User < ActiveRecord::Base
           user_id: self.id,
           company_id: company_id, 
           num_shares: -self.portfolio[company_id], 
-          price: Company.find(company_id).quotes.last.price
+          price: Company.find(company_id).quotes.order("id").last.price
         )
       )
     end
