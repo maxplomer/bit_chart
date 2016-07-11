@@ -46,4 +46,34 @@ Trade.all.each do |trade|
 end
 
 
+# Getting error 
+
+    ActionView::Template::Error (undefined method `price' for nil:NilClass):
+        2:   json.id company.id
+        3:   json.name company.name
+        4:   json.symbol company.symbol
+        5:   json.price company.quotes.last.price
+        6:   json.change company.quotes.last.change
+        7: end
+
+Some companies may have gone out of business !
+
+
+    Company.all.each do |company|
+      puts company.id
+      puts company.quotes.last.price
+    end
+
+Delete each company that fails in this loop
+
+For example I can do delete ACE
+
+    Company.find(1007).destroy
+
+For now until I totally reset database and debug app, need to delete every company with id after 1014 (something is happening where maxing out yahoo finance API)
+
+    1014.upto(1356).each do |i|
+        Company.find(i).destroy rescue nil
+    end
+
 
